@@ -22,7 +22,10 @@
 
     <style name="DefaultSolid" parent="Widget.MaterialComponents.Button">
         <item name="shapeAppearanceOverlay">@style/Button.Rounded</item>
+    </style>
 
+    <style name="NavigationItem" parent="android:Widget.TextView">
+        <item name="fontFamily">"@font/poppinsr"</item>
     </style>
 
 </resources>
