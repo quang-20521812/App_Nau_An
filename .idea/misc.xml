@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Quang/AndroidStudioProjects/App_Nau_An/app/src/main/res/layout/activity_main.xml" value="0.1361111111111111" />
+        <entry key="..\:/Users/Quang/AndroidStudioProjects/App_Nau_An/app/src/main/res/layout/activity_sign_in_screen.xml" value="0.1361111111111111" />
         <entry key="..\:/Users/Quang/AndroidStudioProjects/App_Nau_An/app/src/main/res/layout/activity_sign_up_screen.xml" value="0.1361111111111111" />
         <entry key="..\:/Users/Quang/AndroidStudioProjects/App_Nau_An/app/src/main/res/layout/activity_start_screen.xml" value="0.1361111111111111" />
         <entry key="..\:/Users/Quang/AndroidStudioProjects/App_Nau_An/app/src/main/res/layout/nav_header.xml" value="0.1361111111111111" />
@@ -25,7 +27,7 @@
         <entry key="..\:/Users/Quang/AndroidStudioProjects/App_Nau_An/app/src/main/res/layout/activity_sign_up_screen.xml" value="0.1361111111111111" />
         <entry key="..\:/Users/Quang/AndroidStudioProjects/App_Nau_An/app/src/main/res/layout/activity_start_screen.xml" value="0.1361111111111111" />
         <entry key="..\:/Users/Quang/AndroidStudioProjects/App_Nau_An/app/src/main/res/layout/nav_header.xml" value="0.1361111111111111" />
-        <entry key="..\:/Users/Quang/AndroidStudioProjects/App_Nau_An/app/src/main/res/menu/menu.xml" value="0.1361111111111111" />
+        <entry key="..\:/Users/Quang/AndroidStudioProjects/App_Nau_An/app/src/main/res/menu/menu.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/Quang/AndroidStudioProjects/CookingApp/app/src/main/res/layout/activity_main.xml" value="0.1361111111111111" />
         <entry key="..\:/Users/Quang/AndroidStudioProjects/CookingApp/app/src/main/res/layout/activity_sign_in_screen.xml" value="0.1361111111111111" />
         <entry key="..\:/Users/Quang/AndroidStudioProjects/CookingApp/app/src/main/res/layout/activity_sign_up_screen.xml" value="0.1361111111111111" />
