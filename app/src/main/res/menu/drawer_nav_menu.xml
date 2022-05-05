@@ -1,50 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item   android:title="Món ăn yêu thích"
-        android:icon="@drawable/heart"
+        android:icon="@drawable/favfood_icon"
+        android:fontFamily="@font/poppinsr"
         android:id="@+id/favFood"/>
 
     <item   android:title="Hôm nay thiên hạ ăn gì!"
         android:icon="@drawable/calendar"
+        android:fontFamily="@font/poppinsr"
         android:id="@+id/otherFood"/>
 
     <item   android:title="Công thức nhà mình"
-        android:icon="@drawable/recipe_book"
+        android:icon="@drawable/myrecipe_icon"
+        android:fontFamily="@font/poppinsr"
         android:id="@+id/homeRecipe"/>
 
     <item   android:title="Đơn giản"
-        android:icon="@drawable/easy"
+        android:icon="@drawable/simplefood_icon"
+        android:fontFamily="@font/poppinsr"
         android:id="@+id/simpleFood"/>
 
     <item   android:title="Tiết kiệm"
-        android:icon="@drawable/piggy_bank"
+        android:icon="@drawable/cheapfood_icon"
+        android:fontFamily="@font/poppinsr"
         android:id="@+id/cheapFood"/>
 
     <item   android:title="Ăn vặt"
-        android:icon="@drawable/snack"
+        android:icon="@drawable/snackfood_icon"
+        android:fontFamily="@font/poppinsr"
         android:id="@+id/snackFood" />
 
     <item   android:title="Món ăn ngày lễ"
-        android:icon="@drawable/confetti"
+        android:icon="@drawable/fesfood_icon"
+        android:fontFamily="@font/poppinsr"
         android:id="@+id/fesFood"/>
 
     <item   android:title="Món ăn chay"
-        android:icon="@drawable/vegetable"
+        android:icon="@drawable/vegfood_icon"
+        android:fontFamily="@font/poppinsr"
         android:id="@+id/vegFood"/>
 
     <item   android:title="Món ăn giảm cân"
-        android:icon="@drawable/fitness"
+        android:icon="@drawable/healthyfood_icon"
+        android:fontFamily="@font/poppinsr"
         android:id="@+id/dietFood"/>
 
     <item   android:title="Món bánh ngon"
-        android:icon="@drawable/cake"
+        android:icon="@drawable/cake_icon"
+        android:fontFamily="@font/poppinsr"
         android:id="@+id/pie" />
 
     <item   android:title="Món nhậu cơ bản"
-        android:icon="@drawable/beer"
+        android:icon="@drawable/drinkingfood_icon"
+        android:fontFamily="@font/poppinsr"
         android:id="@+id/drinkFood"/>
 
     <item android:title="Đăng xuất"
         android:icon="@drawable/ic_baseline_logout_24"
+        android:fontFamily="@font/poppinsr"
         android:id="@+id/logout"/>
 </menu>

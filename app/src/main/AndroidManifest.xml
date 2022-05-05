@@ -13,13 +13,13 @@
             android:name=".SignUpScreen"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".SignInScreen"
             android:exported="false" />
         <activity
             android:name=".StartScreen"
             android:exported="false" />
         <activity
-            android:name=".SignInScreen"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
