@@ -21,7 +21,7 @@ public class SignUpScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_screen);
-        getSupportActionBar().hide();
+//        getSupportActionBar().hide();
 
         editTextEmail = (EditText) findViewById(R.id.editTextEmailSU);
         editTextPassword = (EditText) findViewById(R.id.editTextPasswordSU);
