@@ -14,6 +14,6 @@
     <item   android:title="Mẹo hay"
         android:icon="@drawable/tip_icon"
         android:fontFamily="@font/poppinsr"
-        android:id="@+id/tip"/>
+        android:id="@+id/tips"/>
 
 </menu>
