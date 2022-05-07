@@ -1,5 +1,6 @@
 package com.example.cookingapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.NavController;
@@ -8,8 +9,10 @@ import androidx.navigation.ui.NavigationUI;
 
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -34,6 +37,31 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupBottomNavigationView() {
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNav);
+
+        FragmentMeoHay fragmentMeoHay = new FragmentMeoHay();
+
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                switch (id){
+                    case R.id.home_bot_nav:{
+                        break;
+                    }
+                    case R.id.shopping_bot_nav:{
+                        break;
+                    }
+                    case R.id.tips_bot_nav:{
+                        getSupportFragmentManager().beginTransaction().replace(R.id.NavHost, fragmentMeoHay).commit();
+                        break;
+                    }
+                    default:{
+                        break;
+                    }
+                }
+                return true;
+            }
+        });
     }
 
     @Override
