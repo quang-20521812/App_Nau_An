@@ -15,7 +15,6 @@ public class ActivityMeoHay extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meo_hay);
-        getSupportActionBar().hide();
 
         ImageView imageViewMain = (ImageView) findViewById(R.id.imageViewActivityMeoHay);
         TextView textViewTitleMain = (TextView) findViewById(R.id.textViewTitleActivityMeoHay);
