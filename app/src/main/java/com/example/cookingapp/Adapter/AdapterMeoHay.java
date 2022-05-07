@@ -33,7 +33,7 @@ public class AdapterMeoHay extends RecyclerView.Adapter<AdapterMeoHay.ItemViewHo
     @NonNull
     @Override
     public AdapterMeoHay.ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.meo_hay_display, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.meo_hay_card, parent, false);
         return new ItemViewHolder(view);
     }
 
