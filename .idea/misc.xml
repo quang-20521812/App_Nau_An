@@ -3,18 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/ABaiTap/Nam2/HK2/LTDD/App_Nau_An/app/src/main/res/drawable/custom_bottom_nav.xml" value="0.193" />
-        <entry key="..\:/ABaiTap/Nam2/HK2/LTDD/App_Nau_An/app/src/main/res/drawable/custom_edit_text.xml" value="0.193" />
-        <entry key="..\:/ABaiTap/Nam2/HK2/LTDD/App_Nau_An/app/src/main/res/drawable/custom_solid_button.xml" value="0.193" />
-        <entry key="..\:/ABaiTap/Nam2/HK2/LTDD/App_Nau_An/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
-        <entry key="..\:/ABaiTap/Nam2/HK2/LTDD/App_Nau_An/app/src/main/res/layout/activity_sign_in_screen.xml" value="0.36666666666666664" />
-        <entry key="..\:/ABaiTap/Nam2/HK2/LTDD/App_Nau_An/app/src/main/res/layout/activity_sign_up_screen.xml" value="0.36666666666666664" />
-        <entry key="..\:/ABaiTap/Nam2/HK2/LTDD/App_Nau_An/app/src/main/res/layout/activity_start_screen.xml" value="0.36666666666666664" />
-        <entry key="..\:/ABaiTap/Nam2/HK2/LTDD/App_Nau_An/app/src/main/res/layout/nav_header.xml" value="0.36666666666666664" />
-        <entry key="..\:/ABaiTap/Nam2/HK2/LTDD/App_Nau_An/app/src/main/res/menu/bottom_nav_menu.xml" value="0.36666666666666664" />
-        <entry key="..\:/ABaiTap/Nam2/HK2/LTDD/App_Nau_An/app/src/main/res/menu/drawer_nav_menu.xml" value="0.36666666666666664" />
-        <entry key="..\:/ABaiTap/Nam2/HK2/LTDD/App_Nau_An/app/src/main/res/menu/menu2.xml" value="0.2777777777777778" />
-        <entry key="..\:/ABaiTap/Nam2/HK2/LTDD/App_Nau_An/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.193" />
+        <entry key="..\:/Users/ACER/AndroidStudioProjects/App_Nau_An/app/src/main/res/drawable/custom_solid_button.xml" value="0.156" />
+        <entry key="..\:/Users/ACER/AndroidStudioProjects/App_Nau_An/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/ACER/AndroidStudioProjects/App_Nau_An/app/src/main/res/layout/activity_meo_hay.xml" value="0.25" />
+        <entry key="..\:/Users/ACER/AndroidStudioProjects/App_Nau_An/app/src/main/res/layout/activity_sign_in_screen.xml" value="0.25" />
+        <entry key="..\:/Users/ACER/AndroidStudioProjects/App_Nau_An/app/src/main/res/layout/activity_sign_up_screen.xml" value="0.25" />
+        <entry key="..\:/Users/ACER/AndroidStudioProjects/App_Nau_An/app/src/main/res/layout/activity_start_screen.xml" value="0.25" />
+        <entry key="..\:/Users/ACER/AndroidStudioProjects/App_Nau_An/app/src/main/res/layout/fragment_meo_hay.xml" value="0.25" />
+        <entry key="..\:/Users/ACER/AndroidStudioProjects/App_Nau_An/app/src/main/res/layout/meo_hay_display.xml" value="0.2" />
+        <entry key="..\:/Users/ACER/AndroidStudioProjects/App_Nau_An/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25" />
+        <entry key="..\:/Users/ACER/AndroidStudioProjects/App_Nau_An/app/src/main/res/menu/drawer_nav_menu.xml" value="0.25" />
         <entry key="..\:/Users/Quang/AndroidStudioProjects/App_Nau_An/app/src/main/res/layout/activity_main.xml" value="0.1796875" />
         <entry key="..\:/Users/Quang/AndroidStudioProjects/App_Nau_An/app/src/main/res/layout/activity_sign_in_screen.xml" value="0.1796875" />
         <entry key="..\:/Users/Quang/AndroidStudioProjects/CookingApp/app/src/main/res/layout/activity_main.xml" value="0.1361111111111111" />
