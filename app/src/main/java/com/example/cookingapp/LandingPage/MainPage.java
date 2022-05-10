@@ -44,13 +44,13 @@ public class MainPage extends Fragment {
         new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
             switch (position){
                 case 0:
-                    tab.setText("Hôm nay");
+                    tab.setText("Bữa sáng");
                     break;
                 case 1:
-                    tab.setText("Ngày mai");
+                    tab.setText("Bữa trưa");
                     break;
                 default:
-                    tab.setText("Ngày kia");
+                    tab.setText("Bữa tối");
                     break;
             }
         }).attach();
