@@ -4,9 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Android Studio/App_Nau_An/app/src/main/res/layout/activity_main.xml" value="0.10989583333333333" />
+        <entry key="..\:/Android Studio/App_Nau_An/app/src/main/res/layout/activity_sign_up_screen.xml" value="0.25" />
         <entry key="..\:/Android Studio/App_Nau_An/app/src/main/res/layout/fragment_food_page1.xml" value="0.25" />
         <entry key="..\:/Android Studio/App_Nau_An/app/src/main/res/layout/fragment_main_page.xml" value="0.19882246376811594" />
         <entry key="..\:/Android Studio/App_Nau_An/app/src/main/res/layout/fragment_tablayout_day.xml" value="0.25" />
+        <entry key="..\:/Android Studio/App_Nau_An/app/src/main/res/layout/grid_item_layout.xml" value="0.25" />
         <entry key="..\:/Users/Quang/AndroidStudioProjects/App_Nau_An/app/src/main/res/layout/activity_main.xml" value="0.1796875" />
         <entry key="..\:/Users/Quang/AndroidStudioProjects/App_Nau_An/app/src/main/res/layout/activity_sign_in_screen.xml" value="0.1796875" />
         <entry key="..\:/Users/Quang/AndroidStudioProjects/CookingApp/app/src/main/res/layout/activity_main.xml" value="0.1361111111111111" />
