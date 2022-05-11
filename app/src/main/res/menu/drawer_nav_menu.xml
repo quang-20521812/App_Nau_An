@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu   xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/searchingMenu"
+        android:icon="@drawable/ic_baseline_search_24"
+        android:title="Searching"
+        app:showAsAction="always" />
     <item   android:title="Món ăn yêu thích"
         android:icon="@drawable/favfood_icon"
         android:fontFamily="@font/poppinsr"
