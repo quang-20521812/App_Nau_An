@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ActivityMeoHay"
+    android:orientation="vertical"
+    android:background="#C8F2EF">
+
+    <ImageView
+        android:id="@+id/imageViewActivityMeoHay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        tools:srcCompat="@tools:sample/avatars"/>
+
+    <TextView
+        android:id="@+id/textViewTitleActivityMeoHay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Title"
+        android:textSize="20dp"
+        android:textColor="@color/teal_700"
+        android:fontFamily="@font/bebas"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/textViewDesActivityMeoHay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Mô tả"
+        android:textSize="15dp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/poppinsr"/>
+
+</LinearLayout>
