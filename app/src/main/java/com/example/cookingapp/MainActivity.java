@@ -53,8 +53,6 @@ public class MainActivity extends AppCompatActivity {
         adapter_selectedFood.setFoodList(getFoodList());
         rcv_selectedFood.setAdapter(adapter_selectedFood);
 
-        rcv_selectedFood.setClipToPadding(false);
-        rcv_selectedFood.setClipChildren(false);
     }
 
     private List<Food> getFoodList() {
