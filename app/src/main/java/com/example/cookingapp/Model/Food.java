@@ -7,6 +7,20 @@ public class Food {
     private String foodName;
     private List<Ingredient> ingredients;
     private String[] cookingSteps;
+    private int resourceID;
+
+    public Food(String foodName, int resourceID) {
+        this.foodName = foodName;
+        this.resourceID = resourceID;
+    }
+
+    public int getResourceID() {
+        return resourceID;
+    }
+
+    public void setResourceID(int resourceID) {
+        this.resourceID = resourceID;
+    }
 
     public String getFoodKey() {
         return foodKey;
