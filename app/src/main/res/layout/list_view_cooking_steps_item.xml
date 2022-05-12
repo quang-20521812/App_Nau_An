@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/poppinsr"
+        android:paddingTop="7dp"
+        android:textSize="17dp"
+        android:textColor="@color/dark_purple"
+        android:textStyle="bold"
+        android:text="Bước 1"
+        android:id="@+id/tvStepTitle"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="7dp"
+        android:paddingTop="3dp"
+        android:fontFamily="@font/poppinsr"
+        android:textColor="@color/dark_purple"
+        android:text="Đầu cá hồi làm sạch, chặt làm 4 để ráo."
+        android:id="@+id/tvStepInfo"/>
+
+</LinearLayout>
