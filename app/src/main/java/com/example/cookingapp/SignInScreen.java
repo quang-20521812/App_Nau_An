@@ -60,9 +60,10 @@ public class SignInScreen extends AppCompatActivity {
                                 if (document.exists()) {
                                     signIn(password,document.get("country").toString());
                                 } else {
-                                    wrongPassword();
+                                    wrongUsername();
                                 }
                             } else {
+                                txtCheckPassword.setText(task.getException().toString());
                                 Toast.makeText(SignInScreen.this, "Đã xảy ra lỗi!", Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -79,9 +80,15 @@ public class SignInScreen extends AppCompatActivity {
         });
     }
     private void signIn(String passwordInput, String password){
-
+        if(passwordInput.compareTo(password) == 0)
+        {
+            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+        }
+        else {
+            txtCheckPassword.setText("Mật khẩu bạn nhập vào chưa đúng!");
+        }
     }
-    private void wrongPassword(){
-        txtCheckPassword.setText("Mật khẩu bạn nhập vào chưa đúng!");
+    private void wrongUsername(){
+        txtCheckUsername.setText("Tài khoản không tồn tại!");
     }
 }

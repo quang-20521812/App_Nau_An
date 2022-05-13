@@ -87,9 +87,27 @@ public class SignUpScreen extends AppCompatActivity {
                 }
                 else if (confirmPassword.equals(password)) {
 //
-                        pushInfoToFirestore(name,username,password,sdt);
+                    Map<String,Object> user = new HashMap<>();
+                    user.put("Name",name);
+                    user.put("Username",username);
+                    user.put("Password",password);
+                    user.put("Phone",sdt);
+                    firestore.collection("User").document(username)
+                            .set(user)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(SignUpScreen.this, "Đăng ký thành công!", Toast.LENGTH_LONG).show();
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(SignUpScreen.this, "Đăng ký thất bại!", Toast.LENGTH_LONG).show();
+                                }
+                            });
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
-//                        finish();
+                        finish();
                 }
             }
         });
@@ -101,25 +119,5 @@ public class SignUpScreen extends AppCompatActivity {
         txtCheckPassword.setText("");
         txtCheckConfirmPassword.setText("");
     }
-    private void pushInfoToFirestore(String name, String username, String password, String sdt){
-        Map<String,Object> user = new HashMap<>();
-        user.put("Name",name);
-        user.put("Username",username);
-        user.put("Password",password);
-        user.put("Phone",sdt);
-        firestore.collection("User").document(username)
-                .set(user)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Toast.makeText(SignUpScreen.this, "Đăng ký thành công!", Toast.LENGTH_LONG).show();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(SignUpScreen.this, "Đăng ký thất bại!", Toast.LENGTH_LONG).show();
-                    }
-                });
-    }
+
 }
