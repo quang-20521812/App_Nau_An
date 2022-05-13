@@ -1,5 +1,6 @@
 package com.example.cookingapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -9,11 +10,19 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class SignUpScreen extends AppCompatActivity {
 
     FirebaseAuth firebaseAuth;
+    FirebaseFirestore fireStore;
     EditText editTextEmail,editTextPassword,editTextSDT,editTextFullname, editTextConfirmPassWord;
     TextView txtCheckName, txtCheckMail,txtCheckSDT,txtCheckPassword, txtCheckConfirmPassword;
 
@@ -35,6 +44,7 @@ public class SignUpScreen extends AppCompatActivity {
         txtCheckConfirmPassword = findViewById(R.id.txtCheckCFPass);
 
         firebaseAuth = FirebaseAuth.getInstance();
+        fireStore = FirebaseFirestore.getInstance();
 
         resetText();
 
@@ -53,7 +63,7 @@ public class SignUpScreen extends AppCompatActivity {
                 String password = editTextPassword.getText().toString();
                 String confirmPassword = editTextConfirmPassWord.getText().toString();
                 String name = editTextFullname.getText().toString();
-                String sdt = editTextSDT.getText().toString();
+                String phoneNumber = editTextSDT.getText().toString();
                 resetText();
 
                 if (email.isEmpty()) {
@@ -65,7 +75,7 @@ public class SignUpScreen extends AppCompatActivity {
                 if(name.isEmpty()){
                     txtCheckName.setText("Hãy nhập họ và tên!");
                 }
-                if(sdt.isEmpty()){
+                if(phoneNumber.isEmpty()){
                     txtCheckSDT.setText("Hãy nhập số điện thoại!");
                 }
                 if(confirmPassword.isEmpty()){
@@ -81,6 +91,23 @@ public class SignUpScreen extends AppCompatActivity {
                     firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(SignUpScreen.this, task -> {
                         if (task.isSuccessful()) {
                             Toast.makeText(getApplicationContext(), "Đăng ký thành công !!!", Toast.LENGTH_SHORT).show();
+                            Map<String,Object> user = new HashMap<>();
+                            user.put("Name",name);
+                            user.put("Email",email);
+                            user.put("Phone",phoneNumber);
+                            fireStore.collection("user")
+                                    .add(user)
+                                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                        @Override
+                                        public void onSuccess(DocumentReference documentReference) {
+                                            Toast.makeText(SignUpScreen.this, "OK", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(SignUpScreen.this, "Fail", Toast.LENGTH_SHORT).show();
+                                }
+                            });
                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
                             finish();
                         }
