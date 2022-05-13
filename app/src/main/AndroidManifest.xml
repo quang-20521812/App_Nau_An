@@ -13,7 +13,7 @@
             android:name=".ActivityMeoHay"
             android:exported="false" />
         <activity
-            android:name=".SignUpScreen"
+            android:name=".ActitvityFoodDetail"
             android:exported="false" />
         <activity
             android:name=".SignInScreen"
@@ -25,7 +25,7 @@
             android:name=".MainActivity"
             android:exported="false"/>
         <activity
-            android:name=".ActitvityFoodDetail"
+            android:name=".SignUpScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
