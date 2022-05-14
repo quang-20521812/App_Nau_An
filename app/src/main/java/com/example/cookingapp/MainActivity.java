@@ -74,6 +74,9 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNav);
 
         FragmentMeoHay fragmentMeoHay = new FragmentMeoHay();
+        FragmentMainPage fragmentMainPage = new FragmentMainPage();
+        getSupportFragmentManager().beginTransaction().replace(R.id.NavHost, fragmentMainPage).commit();
+
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -81,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
                 int id = item.getItemId();
                 switch (id){
                     case R.id.home_bot_nav:{
+                        getSupportFragmentManager().beginTransaction().replace(R.id.NavHost, fragmentMainPage).commit();
                         break;
                     }
                     case R.id.shopping_bot_nav:{
@@ -88,9 +92,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                     case R.id.tips_bot_nav:{
                         getSupportFragmentManager().beginTransaction().replace(R.id.NavHost, fragmentMeoHay).commit();
-                        break;
-                    }
-                    default:{
                         break;
                     }
                 }

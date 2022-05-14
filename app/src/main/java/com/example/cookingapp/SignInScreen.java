@@ -5,59 +5,67 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class SignInScreen extends AppCompatActivity {
 
-    FirebaseAuth firebaseAuth;
-    EditText editTextEmail,editTextPassword;
-    TextView txtCheckEmail, txtCheckPassword;
+    EditText editTextUsername,editTextPassword;
+    TextView txtCheckUsername, txtCheckPassword;
+    FirebaseFirestore firestore;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in_screen);
 //        getSupportActionBar().hide();
 
-        editTextEmail = (EditText) findViewById(R.id.editTextEmail);
+        editTextUsername = (EditText) findViewById(R.id.editTextUsername);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
-        txtCheckEmail = findViewById(R.id.txtCheckEmail);
+        txtCheckUsername = findViewById(R.id.txtCheckUsernameSI);
         txtCheckPassword = findViewById(R.id.txtCheckPassword);
-        firebaseAuth = FirebaseAuth.getInstance();
 
-        txtCheckEmail.setText("");
+        txtCheckUsername.setText("");
         txtCheckPassword.setText("");
+
+        firestore = FirebaseFirestore.getInstance();
 
         findViewById(R.id.btnSignIn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email = editTextEmail.getText().toString();
+                String username = editTextUsername.getText().toString();
                 String password = editTextPassword.getText().toString();
 
-                if (email.isEmpty()) {
-                    txtCheckEmail.setText("Hãy nhập email!");
+                if (username.isEmpty()) {
+                    txtCheckUsername.setText("Hãy nhập email!");
                 }
                 if(password.isEmpty()){
                     txtCheckPassword.setText("Hãy nhập mật khẩu!");
                 }
                 else {
-                    firebaseAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                    DocumentReference docRef = firestore.collection("User").document(username);
+                    docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
-                        public void onSuccess(AuthResult authResult) {
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
-                            return;
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                DocumentSnapshot document = task.getResult();
+                                if (document.exists()) {
+                                    signIn(password,document.get("country").toString());
+                                } else {
+                                    wrongUsername();
+                                }
+                            } else {
+                                txtCheckPassword.setText(task.getException().toString());
+                                Toast.makeText(SignInScreen.this, "Đã xảy ra lỗi!", Toast.LENGTH_SHORT).show();
+                            }
                         }
                     });
                 }
@@ -70,5 +78,17 @@ public class SignInScreen extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+    private void signIn(String passwordInput, String password){
+        if(passwordInput.compareTo(password) == 0)
+        {
+            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+        }
+        else {
+            txtCheckPassword.setText("Mật khẩu bạn nhập vào chưa đúng!");
+        }
+    }
+    private void wrongUsername(){
+        txtCheckUsername.setText("Tài khoản không tồn tại!");
     }
 }

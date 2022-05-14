@@ -15,10 +15,18 @@
         <entry key="..\:/ABaiTap/Nam2/HK2/LTDD/master/app/src/main/res/layout/list_view_cooking_steps_item.xml" value="0.36666666666666664" />
         <entry key="..\:/ABaiTap/Nam2/HK2/LTDD/master/app/src/main/res/layout/list_view_ingredient_item.xml" value="0.36666666666666664" />
         <entry key="..\:/ABaiTap/Nam2/HK2/LTDD/master/app/src/main/res/layout/meo_hay_card.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/ACER/AndroidStudioProjects/App_Nau_An/app/src/main/res/drawable/ic_button_like.xml" value="0.156" />
-        <entry key="..\:/Users/ACER/AndroidStudioProjects/App_Nau_An/app/src/main/res/layout/food_item_card.xml" value="0.25" />
-        <entry key="..\:/Users/ACER/AndroidStudioProjects/App_Nau_An/app/src/main/res/layout/meo_hay_card.xml" value="0.25" />
-        <entry key="..\:/Users/ACER/AndroidStudioProjects/App_Nau_An/app/src/main/res/layout/selected_food.xml" value="0.25" />
+        <entry key="..\:/Android Studio/App_Nau_An/app/src/main/res/drawable/custom_selected_tab.xml" value="0.104" />
+        <entry key="..\:/Android Studio/App_Nau_An/app/src/main/res/layout/activity_main.xml" value="0.12183383991894631" />
+        <entry key="..\:/Android Studio/App_Nau_An/app/src/main/res/layout/activity_meo_hay.xml" value="0.25052083333333336" />
+        <entry key="..\:/Android Studio/App_Nau_An/app/src/main/res/layout/activity_sign_in_screen.xml" value="0.19519927536231885" />
+        <entry key="..\:/Android Studio/App_Nau_An/app/src/main/res/layout/activity_sign_up_screen.xml" value="0.22826086956521738" />
+        <entry key="..\:/Android Studio/App_Nau_An/app/src/main/res/layout/fragment_food_page1.xml" value="0.18297101449275363" />
+        <entry key="..\:/Android Studio/App_Nau_An/app/src/main/res/layout/fragment_main_page.xml" value="0.1" />
+        <entry key="..\:/Android Studio/App_Nau_An/app/src/main/res/layout/fragment_meo_hay.xml" value="0.25052083333333336" />
+        <entry key="..\:/Android Studio/App_Nau_An/app/src/main/res/layout/fragment_tab_page.xml" value="0.25052083333333336" />
+        <entry key="..\:/Android Studio/App_Nau_An/app/src/main/res/layout/meo_hay_card.xml" value="0.25052083333333336" />
+        <entry key="..\:/Android Studio/App_Nau_An/app/src/main/res/layout/nav_header.xml" value="0.25052083333333336" />
+        <entry key="..\:/Android Studio/App_Nau_An/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25052083333333336" />
         <entry key="..\:/Users/Quang/AndroidStudioProjects/App_Nau_An/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/Quang/AndroidStudioProjects/App_Nau_An/app/src/main/res/layout/activity_meo_hay.xml" value="0.1796875" />
         <entry key="..\:/Users/Quang/AndroidStudioProjects/App_Nau_An/app/src/main/res/layout/activity_sign_in_screen.xml" value="0.1796875" />
@@ -36,8 +44,6 @@
         <entry key="..\:/Users/Quang/AndroidStudioProjects/CookingApp/app/src/main/res/layout/activity_sign_in_screen.xml" value="0.1361111111111111" />
         <entry key="..\:/Users/Quang/AndroidStudioProjects/CookingApp/app/src/main/res/layout/activity_sign_up_screen.xml" value="0.1361111111111111" />
         <entry key="..\:/Users/Quang/AndroidStudioProjects/CookingApp/app/src/main/res/layout/activity_start_screen.xml" value="0.1361111111111111" />
-        <entry key="..\:/Users/User/Documents/Android/App_Nau_An/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
-        <entry key="..\:/Users/User/Documents/Android/App_Nau_An/app/src/main/res/layout/selected_food.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/User/Documents/Android/App_Nau_An/app/src/main/res/menu/drawer_nav_menu.xml" value="0.1935185185185185" />
         <entry key="..\:/Users/User/Documents/Android/App_Nau_An/app/src/main/res/menu/menu2.xml" value="0.1935185185185185" />
       </map>

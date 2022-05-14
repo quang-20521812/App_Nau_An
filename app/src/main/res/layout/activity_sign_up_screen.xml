@@ -97,8 +97,8 @@
         android:layout_marginStart="52dp"
         android:layout_marginBottom="5dp"
         android:fontFamily="@font/bebas"
-        android:text="Email"
-        app:layout_constraintBottom_toTopOf="@+id/editTextEmailSU"
+        android:text="Tên đăng nhập"
+        app:layout_constraintBottom_toTopOf="@+id/editTextUsernameSU"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -113,7 +113,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/editTextEmailSU"
+        android:id="@+id/editTextUsernameSU"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
@@ -122,7 +122,7 @@
 
         android:ems="10"
         android:fontFamily="@font/poppinsr"
-        android:hint="Email"
+        android:hint="Tên đăng nhập"
         android:inputType="textPersonName"
         android:paddingLeft="20dp"
         android:textColor="#A3A3A3"
@@ -181,7 +181,7 @@
         android:paddingLeft="20dp"
         android:textColor="#A3A3A3"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextEmailSU" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextUsernameSU" />
 
     <TextView
         android:id="@+id/txtName"
@@ -195,7 +195,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextName" />
 
     <TextView
-        android:id="@+id/txtCheckMail"
+        android:id="@+id/txtCheckUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -203,7 +203,7 @@
         android:textColor="#E42B2B"
         android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextEmailSU" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextUsernameSU" />
 
     <TextView
         android:id="@+id/txtCheckSDT"

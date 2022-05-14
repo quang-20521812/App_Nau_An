@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -21,30 +20,29 @@ import java.util.Map;
 
 public class SignUpScreen extends AppCompatActivity {
 
-    FirebaseAuth firebaseAuth;
-    FirebaseFirestore fireStore;
-    EditText editTextEmail,editTextPassword,editTextSDT,editTextFullname, editTextConfirmPassWord;
-    TextView txtCheckName, txtCheckMail,txtCheckSDT,txtCheckPassword, txtCheckConfirmPassword;
-
+    FirebaseFirestore firestore;
+    EditText editTextUsername,editTextPassword,editTextSDT,editTextFullname, editTextConfirmPassWord;
+    TextView txtCheckName, txtCheckUsername,txtCheckSDT,txtCheckPassword, txtCheckConfirmPassword;
+    Boolean isSuccessSignUp = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_sign_up_screen);
 //        getSupportActionBar().hide();
 
-        editTextEmail = (EditText) findViewById(R.id.editTextEmailSU);
+        editTextUsername = (EditText) findViewById(R.id.editTextUsernameSU);
         editTextPassword = (EditText) findViewById(R.id.editTextPasswordSU);
         editTextSDT = (EditText) findViewById(R.id.editTextPhoneNumber);
         editTextFullname = (EditText) findViewById(R.id.editTextName);
         editTextConfirmPassWord = (EditText) findViewById(R.id.editTextConfirmPass);
         txtCheckName = findViewById(R.id.txtName);
         txtCheckSDT = findViewById(R.id.txtCheckSDT);
-        txtCheckMail = findViewById(R.id.txtCheckMail);
+        txtCheckUsername = findViewById(R.id.txtCheckUsername);
         txtCheckPassword = findViewById(R.id.txtCheckPass);
         txtCheckConfirmPassword = findViewById(R.id.txtCheckCFPass);
 
-        firebaseAuth = FirebaseAuth.getInstance();
-        fireStore = FirebaseFirestore.getInstance();
+        firestore = FirebaseFirestore.getInstance();
 
         resetText();
 
@@ -59,15 +57,15 @@ public class SignUpScreen extends AppCompatActivity {
         findViewById(R.id.btnSignUp2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email = editTextEmail.getText().toString();
+                String username = editTextUsername.getText().toString();
                 String password = editTextPassword.getText().toString();
                 String confirmPassword = editTextConfirmPassWord.getText().toString();
                 String name = editTextFullname.getText().toString();
-                String phoneNumber = editTextSDT.getText().toString();
+                String sdt = editTextSDT.getText().toString();
                 resetText();
 
-                if (email.isEmpty()) {
-                    txtCheckMail.setText("Hãy nhập địa chỉ email!");
+                if (username.isEmpty()) {
+                    txtCheckUsername.setText("Hãy nhập tên đăng nhập!");
                 }
                 if(password.isEmpty()){
                     txtCheckPassword.setText("Hãy nhập mật khẩu!");
@@ -75,7 +73,7 @@ public class SignUpScreen extends AppCompatActivity {
                 if(name.isEmpty()){
                     txtCheckName.setText("Hãy nhập họ và tên!");
                 }
-                if(phoneNumber.isEmpty()){
+                if(sdt.isEmpty()){
                     txtCheckSDT.setText("Hãy nhập số điện thoại!");
                 }
                 if(confirmPassword.isEmpty()){
@@ -88,42 +86,38 @@ public class SignUpScreen extends AppCompatActivity {
                     txtCheckConfirmPassword.setText("Mật khẩu xác nhận chưa đúng!");
                 }
                 else if (confirmPassword.equals(password)) {
-                    firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(SignUpScreen.this, task -> {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(getApplicationContext(), "Đăng ký thành công !!!", Toast.LENGTH_SHORT).show();
-                            Map<String,Object> user = new HashMap<>();
-                            user.put("Name",name);
-                            user.put("Email",email);
-                            user.put("Phone",phoneNumber);
-                            fireStore.collection("user")
-                                    .add(user)
-                                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                        @Override
-                                        public void onSuccess(DocumentReference documentReference) {
-                                            Toast.makeText(SignUpScreen.this, "OK", Toast.LENGTH_SHORT).show();
-                                        }
-                                    }).addOnFailureListener(new OnFailureListener() {
+//
+                    Map<String,Object> user = new HashMap<>();
+                    user.put("Name",name);
+                    user.put("Username",username);
+                    user.put("Password",password);
+                    user.put("Phone",sdt);
+                    firestore.collection("User").document(username)
+                            .set(user)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(SignUpScreen.this, "Đăng ký thành công!", Toast.LENGTH_LONG).show();
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(SignUpScreen.this, "Fail", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(SignUpScreen.this, "Đăng ký thất bại!", Toast.LENGTH_LONG).show();
                                 }
                             });
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                            finish();
-                        }
-                        else {
-                            Toast.makeText(getApplicationContext(), "Đăng ký thất bại !!!", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        finish();
                 }
             }
         });
     }
     private void resetText(){
         txtCheckName.setText("");
-        txtCheckMail.setText("");
+        txtCheckUsername.setText("");
         txtCheckSDT.setText("");
         txtCheckPassword.setText("");
         txtCheckConfirmPassword.setText("");
     }
+
 }
