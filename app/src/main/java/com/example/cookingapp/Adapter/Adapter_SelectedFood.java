@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.cookingapp.MainActivity;
 import com.example.cookingapp.Model.Food;
 import com.example.cookingapp.R;
-import com.google.firebase.database.core.Context;
 
 import java.util.List;
 
