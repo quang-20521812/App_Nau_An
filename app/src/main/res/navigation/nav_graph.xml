@@ -3,17 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/favFood">
+    app:startDestination="@id/fragmentFesFood">
 
     <fragment
-        android:id="@+id/searchingMenu"
-        android:name="com.example.cookingapp.FragmentSearching"
-        android:label="fragment_searching"
-        tools:layout="@layout/fragment_searching" />
-    <fragment
-        android:id="@+id/favFood"
-        android:name="com.example.cookingapp.FragmentFoodPage1"
-        android:label="fragment_food_page1"
-        tools:layout="@layout/fragment_food_page1" />
-
+        android:id="@+id/fragmentFesFood"
+        android:name="com.example.cookingapp.FragmentFesFood"
+        android:label="fragment_fes_food"
+        tools:layout="@layout/fragment_fes_food" />
 </navigation>

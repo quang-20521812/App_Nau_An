@@ -1,12 +1,13 @@
 package com.example.cookingapp.Model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Food {
     private String foodKey;
     private String foodName;
     private String foodCate;
-    private List<Ingredient> ingredients;
+    private ArrayList<Ingredient> ingredients;
     private String[] cookingSteps;
     private int resourceID;
 
@@ -23,13 +24,15 @@ public class Food {
         this.resourceID = resourceID;
     }
 
-    public Food(String foodKey, String foodName, String foodCate, List<Ingredient> ingredients, String[] cookingSteps) {
+    public Food(String foodKey, String foodName, String foodCate, ArrayList<Ingredient> ingredients, String[] cookingSteps, int resourceID) {
         this.foodKey = foodKey;
         this.foodName = foodName;
         this.foodCate = foodCate;
         this.ingredients = ingredients;
         this.cookingSteps = cookingSteps;
+        this.resourceID = resourceID;
     }
+
 
     public String getFoodKey() {
         return foodKey;
@@ -59,7 +62,7 @@ public class Food {
         return ingredients;
     }
 
-    public void setIngredients(List<Ingredient> ingredients) {
+    public void setIngredients(ArrayList<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
 

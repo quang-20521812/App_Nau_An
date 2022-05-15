@@ -1,6 +1,9 @@
 package com.example.cookingapp;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TabHost;
 
@@ -21,17 +24,31 @@ public class ActitvityFoodDetail extends AppCompatActivity {
     AdapterFoodDetail_CookingSteps adapterFoodDetail_cookingSteps;
     ListView lvIngredient;
     ListView lvCookingStep;
+    Button btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_detail);
 
+        setupView();
+
         setupTabHost();
 
         setupTabIngredient();
 
         setuptabCookingStep();
+    }
+
+    private void setupView() {
+        btnBack = findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void setuptabCookingStep() {
