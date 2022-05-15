@@ -113,6 +113,134 @@ public class MainActivity extends AppCompatActivity {
         navigationView = findViewById(R.id.NavView);
         NavController navController = Navigation.findNavController(this, R.id.NavHost);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+
+        navigationView.getMenu().getItem(0).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+
+                return true;
+            }
+        });
+
+        navigationView.getMenu().getItem(1).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                Intent intent = new Intent(getApplicationContext(), ActivityNavigationFood.class);
+                intent.putExtra("title", "Món ăn yêu thích");
+                startActivity(intent);
+                return true;
+            }
+        });
+
+        navigationView.getMenu().getItem(2).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                Intent intent = new Intent(getApplicationContext(), ActivityNavigationFood.class);
+                intent.putExtra("title", "Hôm nay thiên hạ ăn gì!");
+                startActivity(intent);
+                return true;
+            }
+        });
+
+        navigationView.getMenu().getItem(3).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                Intent intent = new Intent(getApplicationContext(), ActivityNavigationFood.class);
+                intent.putExtra("title", "Công thức nhà mình");
+                startActivity(intent);
+                return true;
+            }
+        });
+
+        navigationView.getMenu().getItem(4).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                Intent intent = new Intent(getApplicationContext(), ActivityNavigationFood.class);
+                intent.putExtra("title", "Món ăn đơn giản");
+                startActivity(intent);
+                return true;
+            }
+        });
+
+        navigationView.getMenu().getItem(5).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                Intent intent = new Intent(getApplicationContext(), ActivityNavigationFood.class);
+                intent.putExtra("title", "Món ăn tiết kiệm");
+                startActivity(intent);
+                return true;
+            }
+        });
+
+        navigationView.getMenu().getItem(6).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                Intent intent = new Intent(getApplicationContext(), ActivityNavigationFood.class);
+                intent.putExtra("title", "Món ăn vặt");
+                startActivity(intent);
+                return true;
+            }
+        });
+
+        navigationView.getMenu().getItem(7).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                Intent intent = new Intent(getApplicationContext(), ActivityNavigationFood.class);
+                intent.putExtra("title", "Món ăn ngày lễ");
+                startActivity(intent);
+                return true;
+            }
+        });
+
+        navigationView.getMenu().getItem(8).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                Intent intent = new Intent(getApplicationContext(), ActivityNavigationFood.class);
+                intent.putExtra("title", "Món ăn chay");
+                startActivity(intent);
+                return true;
+            }
+        });
+
+        navigationView.getMenu().getItem(9).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                Intent intent = new Intent(getApplicationContext(), ActivityNavigationFood.class);
+                intent.putExtra("title", "Món ăn giảm cân");
+                startActivity(intent);
+                return true;
+            }
+        });
+
+        navigationView.getMenu().getItem(10).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                Intent intent = new Intent(getApplicationContext(), ActivityNavigationFood.class);
+                intent.putExtra("title", "Món ăn bánh ngon");
+                startActivity(intent);
+                return true;
+            }
+        });
+
+        navigationView.getMenu().getItem(11).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                Intent intent = new Intent(getApplicationContext(), ActivityNavigationFood.class);
+                intent.putExtra("title", "Món nhậu");
+                startActivity(intent);
+                return true;
+            }
+        });
+
+        navigationView.getMenu().getItem(12).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                Intent intent = new Intent(getApplicationContext(), SignUpScreen.class);
+                startActivity(intent);
+                return true;
+            }
+        });
     }
 
 

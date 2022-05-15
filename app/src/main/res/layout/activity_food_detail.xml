@@ -88,7 +88,8 @@
                                 android:layout_marginTop="5dp"
                                 android:layout_marginLeft="5dp"
                                 android:background="@drawable/custom_solid_button"
-                                android:text="Quay lại" />
+                                android:text="Quay lại"
+                                android:id="@+id/btnBack"/>
 
                             <Button
                                 android:layout_width="match_parent"
