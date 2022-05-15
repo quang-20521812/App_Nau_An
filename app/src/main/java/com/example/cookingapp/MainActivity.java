@@ -9,6 +9,8 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -44,14 +46,15 @@ public class MainActivity extends AppCompatActivity {
 
         setupBottomNavigationView();
 
-        rcv_selectedFood = findViewById(R.id.rcv_selectedFood);
-        adapter_selectedFood = new Adapter_SelectedFood(this);
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
-        rcv_selectedFood.setLayoutManager(linearLayoutManager);
-
-        adapter_selectedFood.setFoodList(getFoodList());
-        rcv_selectedFood.setAdapter(adapter_selectedFood);
+//        rcv_selectedFood = findViewById(R.id.rcv_selectedFood);
+//        adapter_selectedFood = new Adapter_SelectedFood(this);
+//
+//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
+//        rcv_selectedFood.setLayoutManager(linearLayoutManager);
+//
+//        adapter_selectedFood.setFoodList(getFoodList());
+//        rcv_selectedFood.setAdapter(adapter_selectedFood);
 
     }
 
@@ -74,9 +77,9 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNav);
 
         FragmentMeoHay fragmentMeoHay = new FragmentMeoHay();
-        FragmentMainPage fragmentMainPage = new FragmentMainPage();
-        getSupportFragmentManager().beginTransaction().replace(R.id.NavHost, fragmentMainPage).commit();
-
+        FragmentTab fragmentTab = new FragmentTab();
+        FragmentMainPage fragmentMainPage = new FragmentMainPage(0);
+        getSupportFragmentManager().beginTransaction().replace(R.id.NavHost, fragmentTab).commit();
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -84,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                 int id = item.getItemId();
                 switch (id){
                     case R.id.home_bot_nav:{
-                        getSupportFragmentManager().beginTransaction().replace(R.id.NavHost, fragmentMainPage).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.NavHost, fragmentTab).commit();
                         break;
                     }
                     case R.id.shopping_bot_nav:{
@@ -111,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.NavHost);
         NavigationUI.setupWithNavController(navigationView, navController);
     }
+
 
 
 }
