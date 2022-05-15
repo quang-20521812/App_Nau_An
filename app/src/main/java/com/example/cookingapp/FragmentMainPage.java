@@ -23,7 +23,8 @@ public class FragmentMainPage extends Fragment {
     int tabDayPos;
     TabHost tabHost;
     private Adapter_SelectedFood adapter_selectedFood;
-    private RecyclerView rcv_selectedFood;
+    private RecyclerView rcv_selectedFoodTab1,rcv_selectedFoodTab2,rcv_selectedFoodTab3;
+    List<Food> foodList;
     public FragmentMainPage(int tabDayPos) {
         this.tabDayPos = tabDayPos;
     }
@@ -37,7 +38,9 @@ public class FragmentMainPage extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
+
+         foodList = new ArrayList<>();
+
     }
 
     @Override
@@ -46,42 +49,85 @@ public class FragmentMainPage extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_main_page, container, false);
 
-        rcv_selectedFood = v.findViewById(R.id.rcv_selectedFood);
+        rcv_selectedFoodTab1 = v.findViewById(R.id.rcv_selectedFoodTab1);
+        rcv_selectedFoodTab2 = v.findViewById(R.id.rcv_selectedFoodTab2);
+        rcv_selectedFoodTab3 = v.findViewById(R.id.rcv_selectedFoodTab3);
         tabHost = v.findViewById(R.id.tabHost);
+        adapter_selectedFood = new Adapter_SelectedFood();
 
         tabHost.setup();
         creatTabs();
         setupTabBreakfast();
+//        setupTabLunch();
+//        setupTabDinner();
+        tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+            @Override
+            public void onTabChanged(String s) {
+                switch (s){
+                    case "tabBreakfast":
+                        setupTabBreakfast();
+                        break;
+                    case "tabLunch":
+                        setupTabLunch();
+                        break;
+                    case "tabDinner":
+                        setupTabDinner();
+                        break;
+                }
+            }
+        });
         return v;
     }
 
-    private void setupTabBreakfast() {
-
-        adapter_selectedFood = new Adapter_SelectedFood();
-
+    private void setupTabDinner() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
-        rcv_selectedFood.setLayoutManager(linearLayoutManager);
+        rcv_selectedFoodTab3.setLayoutManager(linearLayoutManager);
+
+        foodList.clear();
+        adapter_selectedFood.setFoodList(getFoodList(tabDayPos,2));
+        rcv_selectedFoodTab3.setAdapter(adapter_selectedFood);
+    }
+
+    private void setupTabLunch() {
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
+        rcv_selectedFoodTab2.setLayoutManager(linearLayoutManager);
+
+        foodList.clear();
+        adapter_selectedFood.setFoodList(getFoodList(tabDayPos,1));
+        rcv_selectedFoodTab2.setAdapter(adapter_selectedFood);
+    }
+
+    private void setupTabBreakfast() {
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
+        rcv_selectedFoodTab1.setLayoutManager(linearLayoutManager);
+        foodList.clear();
 
         adapter_selectedFood.setFoodList(getFoodList(tabDayPos,0));
-        rcv_selectedFood.setAdapter(adapter_selectedFood);
+        rcv_selectedFoodTab1.setAdapter(adapter_selectedFood);
 
     }
 
     private List<Food> getFoodList(int dayPos, int mealPos) {
-        List<Food> foodList = new ArrayList<>();
 
-        if(dayPos == 0)
+        if(mealPos == 0)
         {
-            foodList.add(new Food("Bún Bò", R.drawable.bunbo));
-            foodList.add(new Food("Bánh Canh", R.drawable.banhcanh));
-            foodList.add(new Food("Bánh Khọt", R.drawable.banhkhot));
+            if(dayPos == 0)
+            {
+                foodList.add(new Food("Bún Bò", R.drawable.bunbo));
+            }
+            else if (dayPos == 1){
+                foodList.add(new Food("Bánh Canh", R.drawable.banhcanh));
+            }
+            else if(dayPos == 2){
+                foodList.add(new Food("Bánh Khọt", R.drawable.banhkhot));
+            }
         }
 
-        else if(dayPos == 1){
+        else if(mealPos == 1){
             foodList.add(new Food("Bánh Mì", R.drawable.banhmi));
             foodList.add(new Food("Bánh Xèo", R.drawable.banhxeo));
         }
-        else{
+        else if(mealPos == 2){
             foodList.add(new Food("Cơm Tấm", R.drawable.comtam));
             foodList.add(new Food("Phở", R.drawable.pho));
         }
