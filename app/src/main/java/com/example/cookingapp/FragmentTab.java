@@ -1,7 +1,5 @@
 package com.example.cookingapp;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.cookingapp.Adapter.AdapterForTablayout;
-import com.example.cookingapp.Adapter.AdapterViewPager;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 

@@ -58,20 +58,20 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private List<Food> getFoodList() {
-        List<Food> foodList = new ArrayList<>();
-
-        foodList.add(new Food("Bún Bò", R.drawable.bunbo));
-        foodList.add(new Food("Bánh Canh", R.drawable.banhcanh));
-        foodList.add(new Food("Bánh Khọt", R.drawable.banhkhot));
-        foodList.add(new Food("Bánh Mì", R.drawable.banhmi));
-        foodList.add(new Food("Bánh Xèo", R.drawable.banhxeo));
-        foodList.add(new Food("Cơm Tấm", R.drawable.comtam));
-        foodList.add(new Food("Phở", R.drawable.pho));
-
-        return foodList;
-
-    }
+//    private List<Food> getFoodList() {
+//        List<Food> foodList = new ArrayList<>();
+//
+//        foodList.add(new Food("Bún Bò", R.drawable.bunbo));
+//        foodList.add(new Food("Bánh Canh", R.drawable.banhcanh));
+//        foodList.add(new Food("Bánh Khọt", R.drawable.banhkhot));
+//        foodList.add(new Food("Bánh Mì", R.drawable.banhmi));
+//        foodList.add(new Food("Bánh Xèo", R.drawable.banhxeo));
+//        foodList.add(new Food("Cơm Tấm", R.drawable.comtam));
+//        foodList.add(new Food("Phở", R.drawable.pho));
+//
+//        return foodList;
+//
+//    }
 
     private void setupBottomNavigationView() {
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNav);
