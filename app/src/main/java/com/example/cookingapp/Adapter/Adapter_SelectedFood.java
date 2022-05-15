@@ -17,12 +17,9 @@ import java.util.List;
 
 public class Adapter_SelectedFood extends RecyclerView.Adapter<Adapter_SelectedFood.FoodViewHolder> {
 
-    private MainActivity aContext;
     private List<Food> foodList;
 
-    public Adapter_SelectedFood(MainActivity context) {
-        this.aContext = context;
-    }
+
 
     public void setFoodList(List<Food> a){
         this.foodList = a;
