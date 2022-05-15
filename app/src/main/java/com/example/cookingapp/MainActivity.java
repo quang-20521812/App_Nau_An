@@ -110,6 +110,8 @@ public class MainActivity extends AppCompatActivity {
         navigationView = findViewById(R.id.NavView);
         NavController navController = Navigation.findNavController(this, R.id.NavHost);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        navController.setGraph(R.navigation.nav_graph);
     }
 
 

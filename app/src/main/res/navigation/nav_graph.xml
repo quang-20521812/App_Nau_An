@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_graph">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/favFood">
+
+    <fragment
+        android:id="@+id/searchingMenu"
+        android:name="com.example.cookingapp.FragmentSearching"
+        android:label="fragment_searching"
+        tools:layout="@layout/fragment_searching" />
+    <fragment
+        android:id="@+id/favFood"
+        android:name="com.example.cookingapp.FragmentFoodPage1"
+        android:label="fragment_food_page1"
+        tools:layout="@layout/fragment_food_page1" />
 
 </navigation>
