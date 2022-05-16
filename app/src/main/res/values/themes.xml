@@ -33,10 +33,11 @@
         <item name="android:textSize">21sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:fontFamily">@font/poppinsr</item>
+        <item name="colorAccent">#464444</item>
     </style>
 
     <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-    <item name="android:textColorPrimary">#FAE7E7</item>
+    <item name="android:textColorPrimary">@color/dark_purple</item>
     </style>
 
 </resources>
