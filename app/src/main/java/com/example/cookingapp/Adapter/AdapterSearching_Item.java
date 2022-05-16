@@ -7,6 +7,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
+
 import com.example.cookingapp.Model.Tips;
 import com.example.cookingapp.R;
 
@@ -14,16 +16,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterSearching_Item extends BaseAdapter {
-    private ArrayList<Tips> listFoods;
+    private List<Tips> listFoods;
     private Context mContext;
 
-    public AdapterSearching_Item(ArrayList<Tips> listFoods, Context mContext) {
+    public AdapterSearching_Item(List<Tips> listFoods, Context mContext) {
         this.listFoods = listFoods;
         this.mContext = mContext;
     }
 
 
-    public void setData(ArrayList<Tips> listFoods) {
+    public void setData(List<Tips> listFoods) {
         this.listFoods = listFoods;
         notifyDataSetChanged();
     }
@@ -52,7 +54,7 @@ public class AdapterSearching_Item extends BaseAdapter {
         else
             viewItem = view;
 
-        Tips tips = (Tips) getItem(i);
+        Tips tips = listFoods.get(i);
         ((ImageView) viewItem.findViewById(R.id.imageViewSearchingItem)).setImageResource(tips.getResourceID());
         ((TextView) viewItem.findViewById(R.id.textViewSearchingItem)).setText(tips.getTitle());
 

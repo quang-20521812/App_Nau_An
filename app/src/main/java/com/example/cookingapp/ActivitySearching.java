@@ -16,17 +16,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ActivitySearching extends AppCompatActivity {
+    private androidx.appcompat.widget.SearchView searchViewMain;
     private androidx.recyclerview.widget.RecyclerView recyclerViewSearchingHint;
     private AdapterSearching_Hint adapterSearching_hint;
     private GridView gridViewSearchingItem;
     private AdapterSearching_Item adapterSearching_item;
-    private ArrayList<Tips> listFoods;
+    private List<Tips> listFoods;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_searching);
 
+        searchViewMain = (androidx.appcompat.widget.SearchView) findViewById(R.id.searchViewMain);
         recyclerViewSearchingHint = (androidx.recyclerview.widget.RecyclerView) findViewById(R.id.recyclerViewSearchingHint);
         gridViewSearchingItem = (GridView) findViewById(R.id.gridViewSearchingItem);
         listFoods = new ArrayList<Tips>();
@@ -56,14 +58,7 @@ public class ActivitySearching extends AppCompatActivity {
         return listHints;
     }
 
-    private ArrayList<Tips> getListSearchingItem() {
-        listFoods.add(new Tips(R.drawable.ic_launcher_background, "Món 1", "Mô tả 1"));
-        listFoods.add(new Tips(R.drawable.ic_launcher_background, "Món 2", "Mô tả 2"));
-        listFoods.add(new Tips(R.drawable.ic_launcher_background, "Món 3", "Mô tả 3"));
-        listFoods.add(new Tips(R.drawable.ic_launcher_background, "Món 4", "Mô tả 4"));
-        listFoods.add(new Tips(R.drawable.ic_launcher_background, "Món 5", "Mô tả 5"));
-        listFoods.add(new Tips(R.drawable.ic_launcher_background, "Món 6", "Mô tả 6"));
-
+    private List<Tips> getListSearchingItem() {
         listFoods.add(new Tips(R.drawable.ic_launcher_background, "Món 1", "Mô tả 1"));
         listFoods.add(new Tips(R.drawable.ic_launcher_background, "Món 2", "Mô tả 2"));
         listFoods.add(new Tips(R.drawable.ic_launcher_background, "Món 3", "Mô tả 3"));
