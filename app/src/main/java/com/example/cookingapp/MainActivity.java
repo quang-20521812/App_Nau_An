@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
     BottomNavigationView bottomNavigationView;
 
+
     private Adapter_SelectedFood adapter_selectedFood;
     private RecyclerView rcv_selectedFood;
 
@@ -103,11 +104,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.drawer_nav_menu, menu);
-        return true;
-    }
 
     private void setupDrawerNavigationView() {
         navigationView = findViewById(R.id.NavView);
@@ -236,7 +232,7 @@ public class MainActivity extends AppCompatActivity {
         navigationView.getMenu().getItem(12).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
-                Intent intent = new Intent(getApplicationContext(), SignUpScreen.class);
+                Intent intent = new Intent(getApplicationContext(), SignInScreen.class);
                 startActivity(intent);
                 return true;
             }
