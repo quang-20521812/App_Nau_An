@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
         navigationView.getMenu().getItem(0).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
-
+                startActivity(new Intent(MainActivity.this, ActivitySearching.class));
                 return true;
             }
         });
