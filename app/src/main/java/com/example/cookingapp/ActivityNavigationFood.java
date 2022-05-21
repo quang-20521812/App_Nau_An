@@ -70,11 +70,9 @@ public class ActivityNavigationFood extends AppCompatActivity {
         ingredientArrayList.add(new Ingredient("beef", "Thịt bò", "g", 300));
         ingredientArrayList.add(new Ingredient("beef", "Thịt bò", "muỗng cà phê", 300));
 
-        String[] cookingSteps = new String[] {
-                "Đầu cá hồi làm sạch, chặt làm 4 để ráo. Cà chua thái múi. Thơm(dứa) xắt lát. Măng chua để ráo.",
-                "Tẳm ướp đầu cá hồi với muối, đường, hạt nêm, hành tím, bột nghệ. Sau đó, bắc chảo lên."
-        };
-
+        ArrayList<String> cookingSteps = new ArrayList<>();
+        cookingSteps.add("Đầu cá hồi làm sạch, chặt làm 4 để ráo. Cà chua thái múi. Thơm(dứa) xắt lát. Măng chua để ráo.");
+        cookingSteps.add("Tẳm ướp đầu cá hồi với muối, đường, hạt nêm, hành tím, bột nghệ. Sau đó, bắc chảo lên.");
 
 
         Food food = new Food("abc", "dsd", "asda", ingredientArrayList, cookingSteps, 3);

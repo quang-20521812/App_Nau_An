@@ -19,7 +19,7 @@
             android:name=".SignInScreen"
             android:exported="false" />
         <activity
-            android:name=".ActitvityFoodDetail"
+            android:name=".ActivityNavigationFood"
             android:exported="false" />
         <activity
             android:name=".StartScreen"
@@ -28,7 +28,7 @@
             android:name=".SignUpScreen"
             android:exported="false"/>
         <activity
-            android:name=".ActivityNavigationFood"
+            android:name=".ActitvityFoodDetail"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

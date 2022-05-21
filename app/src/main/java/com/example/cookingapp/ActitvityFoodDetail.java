@@ -53,10 +53,9 @@ public class ActitvityFoodDetail extends AppCompatActivity {
 
     private void setuptabCookingStep() {
 
-        cookingSteps = new String[] {
-                "Đầu cá hồi làm sạch, chặt làm 4 để ráo. Cà chua thái múi. Thơm(dứa) xắt lát. Măng chua để ráo.",
-                "Tẳm ướp đầu cá hồi với muối, đường, hạt nêm, hành tím, bột nghệ. Sau đó, bắc chảo lên."
-        };
+        ArrayList<String> cookingSteps = new ArrayList<>();
+        cookingSteps.add("Đầu cá hồi làm sạch, chặt làm 4 để ráo. Cà chua thái múi. Thơm(dứa) xắt lát. Măng chua để ráo.");
+        cookingSteps.add("Tẳm ướp đầu cá hồi với muối, đường, hạt nêm, hành tím, bột nghệ. Sau đó, bắc chảo lên.");
 
         adapterFoodDetail_cookingSteps = new AdapterFoodDetail_CookingSteps(cookingSteps);
 

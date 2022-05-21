@@ -8,7 +8,7 @@ public class Food {
     private String foodName;
     private String foodCate;
     private ArrayList<Ingredient> ingredients;
-    private String[] cookingSteps;
+    private ArrayList<String> cookingSteps;
     private int resourceID;
 
     public Food(String foodName, int resourceID) {
@@ -24,7 +24,7 @@ public class Food {
         this.resourceID = resourceID;
     }
 
-    public Food(String foodKey, String foodName, String foodCate, ArrayList<Ingredient> ingredients, String[] cookingSteps, int resourceID) {
+    public Food(String foodKey, String foodName, String foodCate, ArrayList<Ingredient> ingredients, ArrayList<String> cookingSteps, int resourceID) {
         this.foodKey = foodKey;
         this.foodName = foodName;
         this.foodCate = foodCate;
@@ -50,7 +50,7 @@ public class Food {
         return foodCate;
     }
 
-    public String[] getCookingSteps() {
+    public ArrayList<String> getCookingSteps() {
         return cookingSteps;
     }
 
@@ -66,19 +66,8 @@ public class Food {
         this.ingredients = ingredients;
     }
 
-    public String[] getCookingStep() {
+    public ArrayList<String> getCookingStep() {
         return cookingSteps;
     }
 
-    public void setCookingStep(String[] cookingStep) {
-        this.cookingSteps = cookingStep;
-    }
-
-    public void setFoodCate(String foodCate) {
-        this.foodCate = foodCate;
-    }
-
-    public void setCookingSteps(String[] cookingSteps) {
-        this.cookingSteps = cookingSteps;
-    }
 }
