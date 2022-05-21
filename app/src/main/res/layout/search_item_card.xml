@@ -31,6 +31,8 @@
         android:layout_height="wrap_content"
         android:text="Tên món"
         android:textSize="16dp"
+        android:textAlignment="center"
+        android:lines="2"
         android:fontFamily="@font/poppinsr"
         android:textColor="@color/black"
         android:layout_gravity="center_horizontal">

@@ -1,27 +1,36 @@
 package com.example.cookingapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.SearchView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.Toast;
 
-import com.example.cookingapp.Adapter.AdapterSearching_Hint;
 import com.example.cookingapp.Adapter.AdapterSearching_Item;
 import com.example.cookingapp.Model.Food;
 import com.example.cookingapp.Model.Tips;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class ActivitySearching extends AppCompatActivity {
     private androidx.appcompat.widget.SearchView searchViewMain;
-    private androidx.recyclerview.widget.RecyclerView recyclerViewSearchingHint;
-    private AdapterSearching_Hint adapterSearching_hint;
     private GridView gridViewSearchingItem;
     private AdapterSearching_Item adapterSearching_item;
-    private List<Tips> listFoods;
+    private List<Food> listFoods;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,43 +38,52 @@ public class ActivitySearching extends AppCompatActivity {
         setContentView(R.layout.activity_searching);
 
         searchViewMain = (androidx.appcompat.widget.SearchView) findViewById(R.id.searchViewMain);
-        recyclerViewSearchingHint = (androidx.recyclerview.widget.RecyclerView) findViewById(R.id.recyclerViewSearchingHint);
         gridViewSearchingItem = (GridView) findViewById(R.id.gridViewSearchingItem);
-        listFoods = new ArrayList<Tips>();
 
-        adapterSearching_hint = new AdapterSearching_Hint(this);
-        adapterSearching_item = new AdapterSearching_Item(listFoods, this);
-
-        recyclerViewSearchingHint.setAdapter(adapterSearching_hint);
+        listFoods = new ArrayList<>();
+        adapterSearching_item = new AdapterSearching_Item(listFoods, getApplicationContext());
         gridViewSearchingItem.setAdapter(adapterSearching_item);
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext(), androidx.recyclerview.widget.RecyclerView.HORIZONTAL, false);
-        recyclerViewSearchingHint.setLayoutManager(linearLayoutManager);
+        // Lấy toàn bộ danh sách món ăn
+        searchListFoods(searchViewMain.getQuery().toString());
 
-        adapterSearching_hint.setData(getListSearchingHint());
-        adapterSearching_item.setData(getListSearchingItem());
+        searchViewMain.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                searchViewMain.clearFocus();
+                searchListFoods(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                searchListFoods(newText);
+                return false;
+            }
+        });
+
+        gridViewSearchingItem.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                // Chuyển qua ActivityFoodDetail
+            }
+        });
     }
 
-    private List<String> getListSearchingHint() {
-        List<String> listHints = new ArrayList<String>();
-
-        listHints.add("Món chay");
-        listHints.add("Món xào");
-        listHints.add("Món canh");
-        listHints.add("Món chiên");
-        listHints.add("Món mặn");
-
-        return listHints;
-    }
-
-    private List<Tips> getListSearchingItem() {
-        listFoods.add(new Tips(R.drawable.ic_launcher_background, "Món 1", "Mô tả 1"));
-        listFoods.add(new Tips(R.drawable.ic_launcher_background, "Món 2", "Mô tả 2"));
-        listFoods.add(new Tips(R.drawable.ic_launcher_background, "Món 3", "Mô tả 3"));
-        listFoods.add(new Tips(R.drawable.ic_launcher_background, "Món 4", "Mô tả 4"));
-        listFoods.add(new Tips(R.drawable.ic_launcher_background, "Món 5", "Mô tả 5"));
-        listFoods.add(new Tips(R.drawable.ic_launcher_background, "Món 6", "Mô tả 6"));
-
-        return listFoods;
+    public void searchListFoods(String query) {
+        FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+        firebaseFirestore.collection("Food").get()
+                .addOnCompleteListener(task -> {
+                    listFoods.clear();
+                    adapterSearching_item.setData(listFoods);
+                    for (DocumentSnapshot documentSnapshot: task.getResult().getDocuments()) {
+                        if (documentSnapshot.getString("foodName").toLowerCase().contains(query.toLowerCase())) {
+                            // Tạm thời là thế này, sẽ còn sửa sau
+                            Food food = new Food(documentSnapshot.getString("foodName"), R.drawable.ic_launcher_background);
+                            listFoods.add(food);
+                            adapterSearching_item.setData(listFoods);
+                        }
+                    }
+                }).addOnFailureListener(e -> Toast.makeText(getBaseContext(), e.getMessage(), Toast.LENGTH_SHORT).show());
     }
 }
