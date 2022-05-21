@@ -8,11 +8,13 @@ import android.widget.TextView;
 import com.example.cookingapp.Model.Ingredient;
 import com.example.cookingapp.R;
 
+import java.util.ArrayList;
+
 public class AdapterFoodDetail_CookingSteps extends BaseAdapter {
 
-    final String[] cookingSteps;
+    final ArrayList<String> cookingSteps;
 
-    public AdapterFoodDetail_CookingSteps(String[] cookingSteps) {
+    public AdapterFoodDetail_CookingSteps(ArrayList<String>cookingSteps) {
         this.cookingSteps = cookingSteps;
     }
 
@@ -23,12 +25,12 @@ public class AdapterFoodDetail_CookingSteps extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return cookingSteps.length;
+        return cookingSteps.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return cookingSteps[i];
+        return cookingSteps.get(i);
     }
 
     @Override
@@ -46,7 +48,7 @@ public class AdapterFoodDetail_CookingSteps extends BaseAdapter {
             viewCookingStep = view;
 
         ((TextView) viewCookingStep.findViewById(R.id.tvStepTitle)).setText(String.format("Bước %s", String.valueOf(i + 1)));
-        ((TextView) viewCookingStep.findViewById(R.id.tvStepInfo)).setText(cookingSteps[i]);
+        ((TextView) viewCookingStep.findViewById(R.id.tvStepInfo)).setText(cookingSteps.get(i));
 
         return viewCookingStep;
     }
