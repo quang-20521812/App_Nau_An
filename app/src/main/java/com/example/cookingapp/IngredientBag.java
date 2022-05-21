@@ -72,7 +72,7 @@ public class IngredientBag extends Fragment {
         ArrayList<Ingredient> list1 = new ArrayList<>();
         ArrayList<Ingredient> list2 = new ArrayList<>();
 
-        String[] string = new String[]{};
+        ArrayList<String> string = new ArrayList<>();
         list1.add(new Ingredient("beef","Bo","g",200));
         list1.add(new Ingredient("veg","Rau","bo",1));
         list1.add(new Ingredient("salt","Muoi","muong",3));
