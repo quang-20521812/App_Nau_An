@@ -18,24 +18,18 @@
             android:layout_width="360dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:layout_marginStart="26dp"
-            app:queryHint="Tìm món ăn"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/custom_search_view"
             app:iconifiedByDefault="false"
-            android:background="@drawable/custom_search_view">
-        </androidx.appcompat.widget.SearchView>
+            app:queryHint="Tìm món ăn"></androidx.appcompat.widget.SearchView>
 
     </LinearLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewSearchingHint"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"/>
 
     <GridView
         android:id="@+id/gridViewSearchingItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:numColumns="3"/>
 
 </LinearLayout>
