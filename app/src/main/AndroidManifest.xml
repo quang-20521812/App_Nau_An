@@ -28,6 +28,9 @@
             android:name=".SignUpScreen"
             android:exported="false"/>
         <activity
+            android:name=".ActivitySearching"
+            android:exported="false"/>
+        <activity
             android:name=".ActitvityFoodDetail"
             android:exported="true">
             <intent-filter>
