@@ -4,60 +4,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShoppingBag {
-    ArrayList<String> foodKeyList;
-    ArrayList<String> foodNameList;
     ArrayList<Ingredient> ingredientList;
 
     public ShoppingBag() {
-        foodKeyList = new ArrayList<>();
         ingredientList = new ArrayList<>();
-        foodNameList = new ArrayList<>();
     }
 
-     public void addFood(Food food){
-        foodKeyList.add(food.getFoodKey());
-        foodNameList.add(food.getFoodName());
+    public void addFood(ArrayList<Ingredient> ingredients) {
 
         int size;
-        if(this.ingredientList.size() < food.getIngredients().size()){
+        if (this.ingredientList.size() < ingredients.size()) {
             size = this.ingredientList.size();
-        }
-        else {
-            size = food.getIngredients().size();
+        } else {
+            size = ingredients.size();
         }
         int j = 0;
-        String list = "";
-        for(int i = 0; i < size; i++){
-            if(this.ingredientList.get(i).getIngKey().contains(food.getIngredients().get(j).getIngKey()))
-            {
-                this.ingredientList.get(i).setIngQuantity(this.ingredientList.get(i).getIngQuantity()
-                        + food.getIngredients().get(i).getIngQuantity());
-                food.getIngredients().get(i).setIngQuantity(0);
+        int temp1 = 0;
+        int temp2 = 0;
+        for (int i = 0; i < size; i++) {
+            for (j = 0; j < size; j++) {
+                if (this.ingredientList.get(i).getIngKey().compareTo(ingredients.get(j).getIngKey()) == 0
+                        && ingredients.get(i).getIngQuantity() != 0) {
+                    temp1 = this.ingredientList.get(i).getIngQuantity();
+                    temp2 = ingredients.get(j).getIngQuantity();
+                    this.ingredientList.get(i).setIngQuantity(temp1 + temp2);
+                    ingredients.get(j).setIngQuantity(0);
+                }
             }
-            j++;
+
         }
-        for(j = 0 ; j < food.getIngredients().size(); j ++){
-            if(food.getIngredients().get(j).getIngQuantity() != 0){
-                this.ingredientList.add(food.getIngredients().get(j));
+        for (j = 0; j < ingredients.size(); j++) {
+            if (ingredients.get(j).getIngQuantity() != 0) {
+                this.ingredientList.add(ingredients.get(j));
             }
         }
     }
 
-    public ArrayList<String> getFoodKeyList() {
-        return foodKeyList;
-    }
-
-    public void setFoodKeyList(ArrayList<String> foodKeyList) {
-        this.foodKeyList = foodKeyList;
-    }
-
-    public ArrayList<String> getFoodNameList() {
-        return foodNameList;
-    }
-
-    public void setFoodNameList(ArrayList<String> foodNameList) {
-        this.foodNameList = foodNameList;
-    }
 
     public ArrayList<Ingredient> getIngredientList() {
         return ingredientList;
