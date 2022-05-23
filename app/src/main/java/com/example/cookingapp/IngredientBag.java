@@ -27,6 +27,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -36,11 +37,11 @@ import java.util.Map;
 
 public class IngredientBag extends Fragment {
 
-    ArrayList<String> listFoodID ;
+    ArrayList<String> listFoodID = new ArrayList<>();
     String username = "anhquan";
     FirebaseFirestore firestore;
-    ArrayList<String> listFood = new ArrayList<String>() ;
     ArrayList<Ingredient> ingredients = new ArrayList<>();
+    ArrayList<ArrayList<Ingredient>> ingredientsArrayList = new ArrayList<>();
     String[] string = new String[]{};
     ArrayList<Food> food = new ArrayList<>();
     AdapterShoppingBag adapterShoppingBag;
@@ -83,8 +84,10 @@ public class IngredientBag extends Fragment {
 
         listView = v.findViewById(R.id.listIng);
         shoppingBag = new ShoppingBag();
-        adapterShoppingBag = new AdapterShoppingBag(shoppingBag);
-        listView.setAdapter(adapterShoppingBag);
+//        adapterShoppingBag = new AdapterShoppingBag(shoppingBag);
+//        listView.setAdapter(adapterShoppingBag);
+//        adapterShoppingBag.notifyDataSetChanged();
+
         getListFood();
 
 
@@ -115,7 +118,7 @@ public class IngredientBag extends Fragment {
                         listFoodID.add(groupFood.get(i));
                     }
                 }
-                getIngerdients();
+                getIngerdients(listFoodID);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -124,34 +127,42 @@ public class IngredientBag extends Fragment {
             }
         });
     }
-    private void getIngerdients(){
+    private void getIngerdients(ArrayList<String> listFoodID){
+        firestore = FirebaseFirestore.getInstance();
         for(int i = 0; i < listFoodID.size(); i++){
-            firestore = FirebaseFirestore.getInstance();
-            CollectionReference getIngredients = firestore.collection("Food")
-                    .document(listFood.get(i).toString()).collection("ingredients");
-            getIngredients.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                    for (DocumentSnapshot document : task.getResult()) {
-                        Ingredient ingredient = new Ingredient(document.getId(),document.get("ingName").toString(),
-                                document.get("ingUnit").toString(),(int)document.get("ingQuantity"));
-                        ingredients.add(ingredient);
-                    }
-                    Food f = new Food("","","",ingredients,string,0);
-                    shoppingBag.addFood(f);
+            ArrayList<Ingredient> ingredientTempArrayList = new ArrayList<>();
+            firestore.collection("Food").document(listFoodID.get(i))
+                    .collection("ingredients")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    Map<String, Object> ingredients = document.getData();
+                                    ingredientTempArrayList.add(new Ingredient(document.getId(),
+                                            ingredients.get("ingName").toString(),
+                                            ingredients.get("ingUnit").toString(),
+                                            Integer.parseInt(ingredients.get("ingQuantity").toString())));
+                                }
+//                                ingredientsArrayList.add(ingredientTempArrayList);
+                                shoppingBag.addFood(ingredientTempArrayList);
+                                updateListView();
+                            }
+                        }
 
-                    adapterShoppingBag.notifyDataSetChanged();
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                }
-            }).addOnFailureListener(new OnFailureListener() {
+
+                    }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
 
                 }
             });
         }
+    }
+    private void updateListView() {
+        adapterShoppingBag = new AdapterShoppingBag(shoppingBag);
+        listView.setAdapter(adapterShoppingBag);
+        adapterShoppingBag.notifyDataSetChanged();
     }
 }
