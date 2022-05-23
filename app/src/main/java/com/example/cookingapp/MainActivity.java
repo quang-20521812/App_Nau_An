@@ -46,8 +46,6 @@ public class MainActivity extends AppCompatActivity {
         setupDrawerNavigationView();
 
         setupBottomNavigationView();
-
-
     }
 
 
@@ -101,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 Intent intent = new Intent(getApplicationContext(), ActivityNavigationFood.class);
-                intent.putExtra("title", "Món ăn yêu thích");
+                intent.putExtra("foodCate", "all");
                 startActivity(intent);
                 return true;
             }
@@ -111,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 Intent intent = new Intent(getApplicationContext(), ActivityNavigationFood.class);
-                intent.putExtra("title", "Hôm nay thiên hạ ăn gì!");
+                intent.putExtra("foodCate", "simple");
                 startActivity(intent);
                 return true;
             }
@@ -121,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 Intent intent = new Intent(getApplicationContext(), ActivityNavigationFood.class);
-                intent.putExtra("title", "Công thức nhà mình");
+                intent.putExtra("foodCate", "saving");
                 startActivity(intent);
                 return true;
             }
@@ -131,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 Intent intent = new Intent(getApplicationContext(), ActivityNavigationFood.class);
-                intent.putExtra("title", "Món ăn đơn giản");
+                intent.putExtra("foodCate", "snack");
                 startActivity(intent);
                 return true;
             }
@@ -141,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 Intent intent = new Intent(getApplicationContext(), ActivityNavigationFood.class);
-                intent.putExtra("title", "Món ăn tiết kiệm");
+                intent.putExtra("foodCate", "veg");
                 startActivity(intent);
                 return true;
             }
@@ -151,63 +149,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 Intent intent = new Intent(getApplicationContext(), ActivityNavigationFood.class);
-                intent.putExtra("title", "Món ăn vặt");
+                intent.putExtra("foodCate", "healthy");
                 startActivity(intent);
                 return true;
             }
         });
+
 
         navigationView.getMenu().getItem(7).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                Intent intent = new Intent(getApplicationContext(), ActivityNavigationFood.class);
-                intent.putExtra("title", "Món ăn ngày lễ");
-                startActivity(intent);
-                return true;
-            }
-        });
-
-        navigationView.getMenu().getItem(8).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                Intent intent = new Intent(getApplicationContext(), ActivityNavigationFood.class);
-                intent.putExtra("title", "Món ăn chay");
-                startActivity(intent);
-                return true;
-            }
-        });
-
-        navigationView.getMenu().getItem(9).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                Intent intent = new Intent(getApplicationContext(), ActivityNavigationFood.class);
-                intent.putExtra("title", "Món ăn giảm cân");
-                startActivity(intent);
-                return true;
-            }
-        });
-
-        navigationView.getMenu().getItem(10).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                Intent intent = new Intent(getApplicationContext(), ActivityNavigationFood.class);
-                intent.putExtra("title", "Món ăn bánh ngon");
-                startActivity(intent);
-                return true;
-            }
-        });
-
-        navigationView.getMenu().getItem(11).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                Intent intent = new Intent(getApplicationContext(), ActivityNavigationFood.class);
-                intent.putExtra("title", "Món nhậu");
-                startActivity(intent);
-                return true;
-            }
-        });
-
-        navigationView.getMenu().getItem(12).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 Intent intent = new Intent(getApplicationContext(), SignInScreen.class);

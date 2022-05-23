@@ -1,22 +1,41 @@
 package com.example.cookingapp;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TabHost;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.cookingapp.Adapter.AdapterFoodDetail_CookingSteps;
 import com.example.cookingapp.Adapter.AdapterFoodDetail_Ingredients;
+import com.example.cookingapp.Model.Food;
 import com.example.cookingapp.Model.Ingredient;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ActitvityFoodDetail extends AppCompatActivity {
 
+    FirebaseFirestore firestore;
     TabHost tabHost;
     ArrayList<Ingredient> ingredientList;
     String[] cookingSteps;
@@ -66,6 +85,10 @@ public class ActitvityFoodDetail extends AppCompatActivity {
 
     private void setupTabIngredient() {
 
+//        test();
+
+
+
         ingredientList = new ArrayList<Ingredient>();
 
         ingredientList.add(new Ingredient("beef", "Thịt bò", "g", 300));
@@ -82,11 +105,42 @@ public class ActitvityFoodDetail extends AppCompatActivity {
         ingredientList.add(new Ingredient("beef", "Thịt bò", "muỗng cà phê", 300));
 
 
+
+
+
         adapterFoodDetailIngredients = new AdapterFoodDetail_Ingredients(ingredientList);
 
         lvIngredient = (ListView) findViewById(R.id.listViewIngredient);
 
         lvIngredient.setAdapter(adapterFoodDetailIngredients);
+    }
+
+    private void test() {
+        firestore = FirebaseFirestore.getInstance();
+        CollectionReference test = firestore.collection("test");
+        String selectedFood = "canh_soup_cu_den_nau_thit";
+        ArrayList<Ingredient> ingredientArrayList = new ArrayList<>();
+
+        firestore.collection("Food").document(selectedFood)
+                .collection("ingredients")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Map<String, Object> ingredients = document.getData();
+                                ingredientArrayList.add(new Ingredient( document.getId().toString(),
+                                                        ingredients.get("ingName").toString(),
+                                                        ingredients.get("ingUnit").toString(),
+                                                        Integer.parseInt(ingredients.get("ingQuantity").toString())));
+                            }
+                            Toast.makeText(getApplicationContext(), ingredientArrayList.get(1).getIngName(), Toast.LENGTH_LONG).show();
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
     }
 
     private void setupTabHost() {
