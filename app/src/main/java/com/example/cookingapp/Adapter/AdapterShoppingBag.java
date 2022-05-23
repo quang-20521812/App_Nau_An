@@ -5,6 +5,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.example.cookingapp.Model.Ingredient;
 import com.example.cookingapp.Model.ShoppingBag;
 import com.example.cookingapp.R;
 
@@ -17,12 +18,12 @@ public class AdapterShoppingBag extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 0;
+        return shoppingBag.getIngredientList().size();
     }
 
     @Override
     public Object getItem(int i) {
-        return null;
+        return shoppingBag.getIngredientList().get(i);
     }
 
     @Override
@@ -36,12 +37,13 @@ public class AdapterShoppingBag extends BaseAdapter {
         if(view == null){
             v = View.inflate(viewGroup.getContext(), R.layout.shopping_bag_view, null);
         }
-        else{
+        else {
             v = view;
-            ((TextView)v.findViewById(R.id.textViewName)).setText(shoppingBag.getIngredientList().get(i).getIngName());
-            ((TextView)v.findViewById(R.id.textViewUnit)).setText(shoppingBag.getIngredientList().get(i).getIngQuantity()
-                    + " " + shoppingBag.getIngredientList().get(i).getIngUnit());
         }
+            Ingredient ingredient = (Ingredient) getItem(i);
+            ((TextView)v.findViewById(R.id.textViewName)).setText(ingredient.getIngName());
+            ((TextView)v.findViewById(R.id.textViewUnit)).setText(ingredient.getIngQuantity()
+                    + " " + ingredient.getIngUnit());
         return v;
     }
 }

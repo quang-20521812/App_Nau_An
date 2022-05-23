@@ -8,18 +8,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="10"
-        android:text="TextView" />
+        android:fontFamily="@font/poppinsr"
+        android:paddingStart="10dp"
+        android:textAlignment="viewStart" />
 
     <TextView
         android:id="@+id/textViewUnit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="4"
-        android:text="TextView" />
+        android:fontFamily="@font/poppinsr"
+        android:paddingEnd="20dp"
+        android:textAlignment="textEnd" />
 
     <CheckBox
         android:id="@+id/checkBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:fontFamily="@font/poppinsr" />
 </LinearLayout>

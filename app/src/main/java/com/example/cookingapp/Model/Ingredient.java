@@ -48,4 +48,6 @@ public class Ingredient {
     public void setIngQuantity(int ingQuantity) {
         this.ingQuantity = ingQuantity;
     }
+
+
 }

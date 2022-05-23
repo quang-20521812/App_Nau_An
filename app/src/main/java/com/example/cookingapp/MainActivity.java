@@ -15,12 +15,21 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.cookingapp.Adapter.Adapter_SelectedFood;
 import com.example.cookingapp.Model.Food;
+import com.example.cookingapp.Model.Ingredient;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
     NavigationView navigationView;
     BottomNavigationView bottomNavigationView;
+
 
 
     private Adapter_SelectedFood adapter_selectedFood;
@@ -48,7 +58,10 @@ public class MainActivity extends AppCompatActivity {
         setupBottomNavigationView();
 
 
+
     }
+
+
 
 
     private void setupBottomNavigationView() {
@@ -57,7 +70,9 @@ public class MainActivity extends AppCompatActivity {
         FragmentMeoHay fragmentMeoHay = new FragmentMeoHay();
         FragmentTab fragmentTab = new FragmentTab();
         IngredientBag fragmentIngredient = new IngredientBag();
+
         getSupportFragmentManager().beginTransaction().replace(R.id.NavHost, fragmentTab).commit();
+
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -216,6 +231,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 
 
 
