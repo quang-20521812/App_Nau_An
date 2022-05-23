@@ -4,23 +4,14 @@
     <item
         android:id="@+id/searchingMenu"
         android:icon="@drawable/ic_baseline_search_24"
-        android:title="Searching"
+        android:title="Tìm kiếm"
         app:showAsAction="always" />
-
-    <item   android:title="Món ăn yêu thích"
-        android:icon="@drawable/favfood_icon"
-        android:fontFamily="@font/poppinsr"
-        android:id="@+id/favFood"/>
 
     <item   android:title="Hôm nay thiên hạ ăn gì!"
         android:icon="@drawable/calendar"
         android:fontFamily="@font/poppinsr"
         android:id="@+id/otherFood"/>
 
-    <item   android:title="Công thức nhà mình"
-        android:icon="@drawable/myrecipe_icon"
-        android:fontFamily="@font/poppinsr"
-        android:id="@+id/homeRecipe"/>
 
     <item   android:title="Đơn giản"
         android:icon="@drawable/simplefood_icon"
@@ -37,10 +28,6 @@
         android:fontFamily="@font/poppinsr"
         android:id="@+id/snackFood" />
 
-    <item   android:title="Món ăn ngày lễ"
-        android:icon="@drawable/fesfood_icon"
-        android:fontFamily="@font/poppinsr"
-        android:id="@+id/fesFood"/>
 
     <item   android:title="Món ăn chay"
         android:icon="@drawable/vegfood_icon"
@@ -52,15 +39,6 @@
         android:fontFamily="@font/poppinsr"
         android:id="@+id/dietFood"/>
 
-    <item   android:title="Món bánh ngon"
-        android:icon="@drawable/cake_icon"
-        android:fontFamily="@font/poppinsr"
-        android:id="@+id/pie" />
-
-    <item   android:title="Món nhậu cơ bản"
-        android:icon="@drawable/drinkingfood_icon"
-        android:fontFamily="@font/poppinsr"
-        android:id="@+id/drinkFood"/>
 
     <item android:title="Đăng xuất"
         android:icon="@drawable/ic_baseline_logout_24"

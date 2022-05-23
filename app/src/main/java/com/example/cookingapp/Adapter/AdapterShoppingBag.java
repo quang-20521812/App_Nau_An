@@ -17,7 +17,7 @@ public class AdapterShoppingBag extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 0;
+        return shoppingBag.getIngredientList().size();
     }
 
     @Override
@@ -38,10 +38,11 @@ public class AdapterShoppingBag extends BaseAdapter {
         }
         else{
             v = view;
-            ((TextView)v.findViewById(R.id.textViewName)).setText(shoppingBag.getIngredientList().get(i).getIngName());
-            ((TextView)v.findViewById(R.id.textViewUnit)).setText(shoppingBag.getIngredientList().get(i).getIngQuantity()
-                    + " " + shoppingBag.getIngredientList().get(i).getIngUnit());
         }
+        ((TextView)v.findViewById(R.id.textViewName)).setText(shoppingBag.getIngredientList().get(i).getIngName());
+        ((TextView)v.findViewById(R.id.textViewUnit)).setText(shoppingBag.getIngredientList().get(i).getIngQuantity()
+                + " " + shoppingBag.getIngredientList().get(i).getIngUnit());
+
         return v;
     }
 }

@@ -93,6 +93,7 @@ public class IngredientBag extends Fragment {
         AdapterShoppingBag adapterShoppingBag = new AdapterShoppingBag(shoppingBag);
         listView.setAdapter(adapterShoppingBag);
         adapterShoppingBag.notifyDataSetChanged();
+
         return v;
     }
 }

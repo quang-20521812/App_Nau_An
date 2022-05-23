@@ -11,6 +11,10 @@ public class Food {
     private ArrayList<String> cookingSteps;
     private int resourceID;
 
+    public Food(){
+        return;
+    }
+
     public Food(String foodName, int resourceID) {
         this.foodName = foodName;
         this.resourceID = resourceID;
