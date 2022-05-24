@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.cookingapp.Adapter.AdapterSearching_Item;
 import com.example.cookingapp.Model.Food;
+import com.example.cookingapp.Model.Ingredient;
 import com.example.cookingapp.Model.Tips;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -65,7 +67,14 @@ public class ActivitySearching extends AppCompatActivity {
         gridViewSearchingItem.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                // Chuyển qua ActivityFoodDetail
+                Food food = (Food) gridViewSearchingItem.getItemAtPosition(i);
+                Intent intent = new Intent(ActivitySearching.this, ActitvityFoodDetail.class);
+                intent.putExtra("foodKey", food.getFoodKey());
+                intent.putExtra("foodName", food.getFoodName());
+                intent.putExtra("foodCate", food.getFoodCate());
+                intent.putExtra("cookingSteps", food.getCookingSteps());
+                intent.putExtra("foodURL", food.getFoodURL());
+                startActivity(intent);
             }
         });
     }
@@ -78,8 +87,15 @@ public class ActivitySearching extends AppCompatActivity {
                     adapterSearching_item.setData(listFoods);
                     for (DocumentSnapshot documentSnapshot: task.getResult().getDocuments()) {
                         if (documentSnapshot.getString("foodName").toLowerCase().contains(query.toLowerCase())) {
-                            // Tạm thời là thế này, sẽ còn sửa sau
-                            Food food = new Food(documentSnapshot.getString("foodName"), R.drawable.ic_launcher_background);
+                            ArrayList<Ingredient> ingredientArrayList = new ArrayList<>();
+
+                            Food food = new Food (documentSnapshot.getId(),
+                                    documentSnapshot.getString("foodName"),
+                                    documentSnapshot.getString("foodCate"),
+                                    ingredientArrayList,
+                                    (ArrayList<String>) documentSnapshot.get("cookingSteps"),
+                                    documentSnapshot.getString("foodURL"));
+
                             listFoods.add(food);
                             adapterSearching_item.setData(listFoods);
                         }

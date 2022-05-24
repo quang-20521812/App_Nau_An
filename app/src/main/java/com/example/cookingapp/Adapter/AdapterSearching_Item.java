@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat;
 import com.example.cookingapp.Model.Food;
 import com.example.cookingapp.Model.Tips;
 import com.example.cookingapp.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +57,7 @@ public class AdapterSearching_Item extends BaseAdapter {
             viewItem = view;
 
         Food food = listFoods.get(i);
-        ((ImageView) viewItem.findViewById(R.id.imageViewSearchingItem)).setImageResource(food.getResourceID());
+        Picasso.get().load(food.getFoodURL()).into((ImageView) viewItem.findViewById(R.id.imageViewSearchingItem));
         ((TextView) viewItem.findViewById(R.id.textViewSearchingItem)).setText(food.getFoodName());
 
         return viewItem;

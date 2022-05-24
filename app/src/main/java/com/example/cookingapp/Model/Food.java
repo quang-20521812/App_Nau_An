@@ -11,6 +11,27 @@ public class Food {
     private ArrayList<String> cookingSteps;
     private int resourceID;
 
+    // Nguyễn Phúc sửa
+    private String foodURL;
+
+    public String getFoodURL() {
+        return foodURL;
+    }
+
+    public void setfoodURL(String foodURL) {
+        this.foodURL = foodURL;
+    }
+
+    public Food(String foodKey, String foodName, String foodCate, ArrayList<Ingredient> ingredients, ArrayList<String> cookingSteps, String foodURL) {
+        this.foodKey = foodKey;
+        this.foodName = foodName;
+        this.foodCate = foodCate;
+        this.ingredients = ingredients;
+        this.cookingSteps = cookingSteps;
+        this.foodURL = foodURL;
+    }
+    // Nguyễn Phúc sửa
+
     public Food(){
         return;
     }
