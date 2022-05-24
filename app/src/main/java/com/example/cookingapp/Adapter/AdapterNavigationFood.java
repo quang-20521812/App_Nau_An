@@ -24,7 +24,7 @@ public class AdapterNavigationFood extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int i) {
+    public Food getItem(int i) {
         return foodArrayList.get(i);
     }
 
