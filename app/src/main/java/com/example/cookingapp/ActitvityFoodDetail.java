@@ -19,109 +19,44 @@ import com.example.cookingapp.Adapter.AdapterFoodDetail_Ingredients;
 import com.example.cookingapp.Model.Food;
 import com.example.cookingapp.Model.Ingredient;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Map;
 
 public class ActitvityFoodDetail extends AppCompatActivity {
 
     FirebaseFirestore firestore;
     TabHost tabHost;
-    ArrayList<Ingredient> ingredientList;
-    String[] cookingSteps;
     AdapterFoodDetail_Ingredients adapterFoodDetailIngredients;
     AdapterFoodDetail_CookingSteps adapterFoodDetail_cookingSteps;
     ListView lvIngredient;
     ListView lvCookingStep;
     Button btnBack;
+    Food food;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_detail);
 
+        retriveFood();
+
         setupView();
 
         setupTabHost();
 
-        setupTabIngredient();
-
-        setuptabCookingStep();
     }
 
-    private void setupView() {
-        btnBack = findViewById(R.id.btnBack);
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-            }
-        });
-    }
-
-    private void setuptabCookingStep() {
-
-        ArrayList<String> cookingSteps = new ArrayList<>();
-        cookingSteps.add("Đầu cá hồi làm sạch, chặt làm 4 để ráo. Cà chua thái múi. Thơm(dứa) xắt lát. Măng chua để ráo.");
-        cookingSteps.add("Tẳm ướp đầu cá hồi với muối, đường, hạt nêm, hành tím, bột nghệ. Sau đó, bắc chảo lên.");
-
-        adapterFoodDetail_cookingSteps = new AdapterFoodDetail_CookingSteps(cookingSteps);
-
-        lvCookingStep = (ListView) findViewById(R.id.listViewCookingSteps);
-
-        lvCookingStep.setAdapter(adapterFoodDetail_cookingSteps);
-    }
-
-    private void setupTabIngredient() {
-
-//        test();
-
-
-
-        ingredientList = new ArrayList<Ingredient>();
-
-        ingredientList.add(new Ingredient("beef", "Thịt bò", "g", 300));
-        ingredientList.add(new Ingredient("beef", "Thịt bò", "g", 300));
-        ingredientList.add(new Ingredient("beef", "Thịt bò", "g", 300));
-        ingredientList.add(new Ingredient("beef", "Thịt bò", "muỗng cà phê", 300));
-        ingredientList.add(new Ingredient("beef", "Thịt bò", "g", 300));
-        ingredientList.add(new Ingredient("beef", "Thịt bò", "g", 300));
-        ingredientList.add(new Ingredient("beef", "Thịt bò", "g", 300));
-        ingredientList.add(new Ingredient("beef", "Thịt bò", "muỗng cà phê", 300));
-        ingredientList.add(new Ingredient("beef", "Thịt bò", "g", 300));
-        ingredientList.add(new Ingredient("beef", "Thịt bò", "g", 300));
-        ingredientList.add(new Ingredient("beef", "Thịt bò", "g", 300));
-        ingredientList.add(new Ingredient("beef", "Thịt bò", "muỗng cà phê", 300));
-
-
-
-
-
-        adapterFoodDetailIngredients = new AdapterFoodDetail_Ingredients(ingredientList);
-
-        lvIngredient = (ListView) findViewById(R.id.listViewIngredient);
-
-        lvIngredient.setAdapter(adapterFoodDetailIngredients);
-    }
-
-    private void test() {
+    private void retriveIngredientsList(String foodKey) {
         firestore = FirebaseFirestore.getInstance();
-        CollectionReference test = firestore.collection("test");
-        String selectedFood = "canh_soup_cu_den_nau_thit";
-        ArrayList<Ingredient> ingredientArrayList = new ArrayList<>();
 
-        firestore.collection("Food").document(selectedFood)
+        ArrayList<Ingredient> ingredientArrayList = new ArrayList<>();
+        firestore.collection("Food").document(foodKey)
                 .collection("ingredients")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -130,18 +65,60 @@ public class ActitvityFoodDetail extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Map<String, Object> ingredients = document.getData();
-                                ingredientArrayList.add(new Ingredient( document.getId().toString(),
-                                                        ingredients.get("ingName").toString(),
-                                                        ingredients.get("ingUnit").toString(),
-                                                        Integer.parseInt(ingredients.get("ingQuantity").toString())));
+                                ingredientArrayList.add(new Ingredient(document.getId(),
+                                        ingredients.get("ingName").toString(),
+                                        ingredients.get("ingUnit").toString(),
+                                        Integer.parseInt(ingredients.get("ingQuantity").toString())));
                             }
-                            Toast.makeText(getApplicationContext(), ingredientArrayList.get(1).getIngName(), Toast.LENGTH_LONG).show();
+                            food.setIngredients(ingredientArrayList);
+                            setupTabIngredient();
+                            setuptabCookingStep();
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
                         }
                     }
                 });
+
     }
+
+    private void retriveFood() {
+        Intent intent = getIntent();
+        food = new Food();
+        food.setFoodKey(intent.getStringExtra("foodKey"));
+        food.setFoodName(intent.getStringExtra("foodName"));
+        food.setFoodCate(intent.getStringExtra("foodCate"));
+        food.setCookingSteps(intent.getStringArrayListExtra("cookingSteps"));
+        retriveIngredientsList(food.getFoodKey());
+    }
+
+    private void setupView() {
+        btnBack = findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+    }
+
+    private void setuptabCookingStep() {
+
+        adapterFoodDetail_cookingSteps = new AdapterFoodDetail_CookingSteps(food.getCookingSteps());
+
+        lvCookingStep = (ListView) findViewById(R.id.listViewCookingSteps);
+
+        lvCookingStep.setAdapter(adapterFoodDetail_cookingSteps);
+    }
+
+    private void setupTabIngredient() {
+
+        adapterFoodDetailIngredients = new AdapterFoodDetail_Ingredients(food.getIngredients());
+
+        lvIngredient = (ListView) findViewById(R.id.listViewIngredient);
+
+        lvIngredient.setAdapter(adapterFoodDetailIngredients);
+    }
+
 
     private void setupTabHost() {
         tabHost = findViewById(R.id.tabHost);

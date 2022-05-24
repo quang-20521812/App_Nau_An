@@ -6,7 +6,8 @@
     android:layout_marginStart="15dp"
     android:layout_marginEnd="15dp"
     android:layout_marginBottom="15dp"
-    android:ignoreGravity="@id/cardViewTitle">
+    android:ignoreGravity="@id/cardViewTitle"
+    android:descendantFocusability="blocksDescendants">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewTitle"
@@ -53,7 +54,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_launcher_background">
+            android:src="@drawable/ic_launcher_background"
+            android:focusable="false">
         </ImageView>
 
     </androidx.cardview.widget.CardView>
@@ -66,7 +68,8 @@
         android:layout_marginEnd="15dp"
         android:layout_alignParentRight="true"
         app:cardCornerRadius="250dp"
-        app:cardBackgroundColor="@color/white">
+        app:cardBackgroundColor="@color/white"
+        android:descendantFocusability="blocksDescendants">
 
         <ImageButton
             android:id="@+id/buttonLike"
@@ -75,7 +78,10 @@
             android:layout_gravity="center"
             android:layout_marginStart="0.5dp"
             android:layout_marginTop="0.5dp"
-            android:background="@drawable/ic_button_like">
+            android:background="@drawable/ic_button_like"
+            android:focusable="false"
+            android:clickable="false"
+            android:focusableInTouchMode="false">
         </ImageButton>
 
     </androidx.cardview.widget.CardView>

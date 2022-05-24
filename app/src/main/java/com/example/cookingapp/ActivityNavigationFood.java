@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -28,10 +29,9 @@ import java.util.Map;
 
 public class ActivityNavigationFood extends AppCompatActivity {
 
-    ListView lvFesFood;
+    ListView lvFood;
     ArrayList<Food> foodArrayList = new ArrayList<>();
     AdapterNavigationFood adapterNavigationFood;
-    ArrayList<ArrayList<Ingredient>> ingredientsArrayList = new ArrayList<>();
     Button btnBack;
     TextView tvTitle;
     String foodCate;
@@ -50,9 +50,11 @@ public class ActivityNavigationFood extends AppCompatActivity {
     }
 
     private void setupView() {
-        lvFesFood = (ListView) findViewById(R.id.lvFesFood);
+        lvFood = (ListView) findViewById(R.id.lvFesFood);
         btnBack = (Button) findViewById(R.id.btnBack);
         tvTitle = (TextView) findViewById(R.id.tvTitle);
+
+
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,11 +63,24 @@ public class ActivityNavigationFood extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        lvFood.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(ActivityNavigationFood.this, ActitvityFoodDetail.class);
+                Food food = (Food) lvFood.getItemAtPosition(i);
+                intent.putExtra("foodKey", food.getFoodKey());
+                intent.putExtra("foodName", food.getFoodName());
+                intent.putExtra("foodCate", food.getFoodCate());
+                intent.putExtra("cookingSteps", food.getCookingSteps());
+                startActivity(intent);
+            }
+        });
     }
 
     private void updateListView() {
         adapterNavigationFood = new AdapterNavigationFood(foodArrayList);
-        lvFesFood.setAdapter(adapterNavigationFood);
+        lvFood.setAdapter(adapterNavigationFood);
     }
 
     private void retriveFoodCate_FoodKey() {
@@ -110,7 +125,19 @@ public class ActivityNavigationFood extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     for (QueryDocumentSnapshot document : task.getResult()) {
                                         foodKeyList.add(document.getId());
+                                        //Ingredients arraylist
+                                        ArrayList<Ingredient> ingredientTempArrayList = new ArrayList<>();
+                                        //CookingSteps
+                                        ArrayList<String> cookingSteps = (ArrayList<String>) document.get("cookingSteps");
+                                        //AddToFoodList
+                                        foodArrayList.add(new Food(document.getId(),
+                                                document.getString("foodName"),
+                                                document.getString("foodCate"),
+                                                ingredientTempArrayList,
+                                                cookingSteps,
+                                                0));
                                     }
+                                    updateListView();
                                 } else {
                                     Log.d(TAG, "Error getting documents: ", task.getException());
                                 }
@@ -144,49 +171,13 @@ public class ActivityNavigationFood extends AppCompatActivity {
                                         cookingSteps,
                                         0));
                             }
-                            retriveIngredientslist(foodKeyList);
+//                            retriveIngredientslist(foodKeyList);
+                            updateListView();
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
                         }
                     }
                 });
 
-    }
-
-    private void retriveIngredientslist(ArrayList<String> foodKeyList) {
-        firestore = FirebaseFirestore.getInstance();
-
-        for (int i = 0; i < foodKeyList.size(); i++) {
-            ArrayList<Ingredient> ingredientTempArrayList = new ArrayList<>();
-            firestore.collection("Food").document(foodKeyList.get(i))
-                    .collection("ingredients")
-                    .get()
-                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            if (task.isSuccessful()) {
-                                for (QueryDocumentSnapshot document : task.getResult()) {
-                                    Map<String, Object> ingredients = document.getData();
-                                    ingredientTempArrayList.add(new Ingredient(document.getId(),
-                                            ingredients.get("ingName").toString(),
-                                            ingredients.get("ingUnit").toString(),
-                                            Integer.parseInt(ingredients.get("ingQuantity").toString())));
-                                }
-                                ingredientsArrayList.add(ingredientTempArrayList);
-                                mergeIngredientslist_Foodlist();
-                                updateListView();
-                            } else {
-                                Log.d(TAG, "Error getting documents: ", task.getException());
-                            }
-                        }
-                    });
-        }
-
-    }
-
-    private void mergeIngredientslist_Foodlist() {
-        for (int i = 0; i< ingredientsArrayList.size(); i++){
-            foodArrayList.get(i).setIngredients(ingredientsArrayList.get(i));
-        }
     }
 }
