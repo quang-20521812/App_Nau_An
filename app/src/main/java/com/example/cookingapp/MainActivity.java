@@ -3,7 +3,10 @@ package com.example.cookingapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
+import androidx.navigation.NavHost;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -30,10 +33,6 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
     BottomNavigationView bottomNavigationView;
 
-
-    private Adapter_SelectedFood adapter_selectedFood;
-    private RecyclerView rcv_selectedFood;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,8 +53,10 @@ public class MainActivity extends AppCompatActivity {
 
         FragmentMeoHay fragmentMeoHay = new FragmentMeoHay();
         FragmentTab fragmentTab = new FragmentTab();
+        FragmentRandom fragmentRandom = new FragmentRandom();
         IngredientBag fragmentIngredient = new IngredientBag();
         getSupportFragmentManager().beginTransaction().replace(R.id.NavHost, fragmentTab).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.firstFrame, fragmentRandom).commit();
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override

@@ -31,10 +31,34 @@
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_marginTop="60dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             app:defaultNavHost="true"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"></fragment>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="110dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/poppinsr"
+            android:paddingTop="6dp"
+            android:text="Món ăn gợi ý cho bạn"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/NavHost" />
+
+        <FrameLayout
+            android:id="@+id/firstFrame"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:layout_marginTop="50dp"
+            android:layout_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/NavHost" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNav"
