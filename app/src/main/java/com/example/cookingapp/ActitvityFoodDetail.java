@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.Toast;
@@ -24,6 +25,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -88,6 +90,8 @@ public class ActitvityFoodDetail extends AppCompatActivity {
         food.setFoodName(intent.getStringExtra("foodName"));
         food.setFoodCate(intent.getStringExtra("foodCate"));
         food.setCookingSteps(intent.getStringArrayListExtra("cookingSteps"));
+        food.setfoodURL(intent.getStringExtra("foodURL"));
+        Picasso.get().load(food.getFoodURL()).into((ImageView) findViewById(R.id.imageViewFoodDetail));
         retriveIngredientsList(food.getFoodKey());
     }
 

@@ -73,6 +73,7 @@ public class ActivityNavigationFood extends AppCompatActivity {
                 intent.putExtra("foodName", food.getFoodName());
                 intent.putExtra("foodCate", food.getFoodCate());
                 intent.putExtra("cookingSteps", food.getCookingSteps());
+                intent.putExtra("foodURL", food.getFoodURL());
                 startActivity(intent);
             }
         });
@@ -129,13 +130,15 @@ public class ActivityNavigationFood extends AppCompatActivity {
                                         ArrayList<Ingredient> ingredientTempArrayList = new ArrayList<>();
                                         //CookingSteps
                                         ArrayList<String> cookingSteps = (ArrayList<String>) document.get("cookingSteps");
+                                        //Image
+                                        String foodURL = document.getString("foodURL");
                                         //AddToFoodList
                                         foodArrayList.add(new Food(document.getId(),
                                                 document.getString("foodName"),
                                                 document.getString("foodCate"),
                                                 ingredientTempArrayList,
                                                 cookingSteps,
-                                                0));
+                                                foodURL));
                                     }
                                     updateListView();
                                 } else {
@@ -163,15 +166,16 @@ public class ActivityNavigationFood extends AppCompatActivity {
                                 ArrayList<Ingredient> ingredientTempArrayList = new ArrayList<>();
                                 //CookingSteps
                                 ArrayList<String> cookingSteps = (ArrayList<String>) document.get("cookingSteps");
+                                //Image
+                                String foodURL = document.getString("foodURL");
                                 //AddToFoodList
                                 foodArrayList.add(new Food(document.getId(),
                                         document.getString("foodName"),
                                         foodCate,
                                         ingredientTempArrayList,
                                         cookingSteps,
-                                        0));
+                                        foodURL));
                             }
-//                            retriveIngredientslist(foodKeyList);
                             updateListView();
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());

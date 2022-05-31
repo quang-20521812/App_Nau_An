@@ -13,6 +13,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.example.cookingapp.Model.Food;
 import com.example.cookingapp.R;
 import com.google.android.material.card.MaterialCardView;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -59,7 +60,7 @@ public class AdapterRandomFood extends RecyclerView.Adapter<AdapterRandomFood.Ra
         }
 
         void setImage(Food randomFood){
-            imgView.setImageResource(randomFood.getResourceID());
+            Picasso.get().load(randomFood.getFoodURL()).into(imgView);
             txtRandom.setText(randomFood.getFoodName());
         }
     }

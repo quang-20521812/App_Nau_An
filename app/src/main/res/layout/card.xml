@@ -1,31 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:clickable="false"
+    android:descendantFocusability="blocksDescendants"
+    android:focusable="false"
+    android:focusableInTouchMode="false">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:checkable="true"
+        android:checkable="false"
         android:clickable="true"
-        android:focusable="true"
+        android:focusable="false"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="6dp"
         app:cardElevation="3dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:descendantFocusability="blocksDescendants">
 
         <ImageView
             android:id="@+id/imgRandom"
             android:layout_width="240dp"
             android:layout_height="135dp"
             android:src="@drawable/bunbo"
-            />
+            android:clickable="true"
+            android:focusable="false"
+            android:focusableInTouchMode="false"/>
 
     </com.google.android.material.card.MaterialCardView>
 
@@ -37,9 +43,14 @@
         android:layout_marginTop="3dp"
         android:text="Bún Bò"
         android:textAlignment="center"
-        android:textSize="34sp"
+        android:textSize="20dp"
         android:textStyle="bold"
+        android:fontFamily="@font/poppinsr"
+        android:textColor="@color/dark_purple"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/materialCardView" />
+        app:layout_constraintTop_toBottomOf="@+id/materialCardView"
+        android:clickable="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

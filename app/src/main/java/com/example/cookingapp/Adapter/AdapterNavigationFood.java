@@ -3,10 +3,12 @@ package com.example.cookingapp.Adapter;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.cookingapp.Model.Food;
 import com.example.cookingapp.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -45,6 +47,7 @@ public class AdapterNavigationFood extends BaseAdapter {
         Food food = foodArrayList.get(i);
         ((TextView) viewNavigationFood.findViewById(R.id.textViewTitle)).setText(food.getFoodName());
         ((TextView) viewNavigationFood.findViewById(R.id.textViewDescription)).setText(food.getFoodCate());
+        Picasso.get().load(food.getFoodURL()).into((ImageView) viewNavigationFood.findViewById(R.id.imageViewDisplay));
 
         return viewNavigationFood;
     }

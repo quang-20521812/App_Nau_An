@@ -51,8 +51,6 @@ public class IngredientBag extends Fragment {
         // Required empty public constructor
     }
 
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,8 +58,6 @@ public class IngredientBag extends Fragment {
         //get foodList in bag
 
         List<String> listFoodID = new ArrayList<String>() ;
-
-
     }
 
     @Override
