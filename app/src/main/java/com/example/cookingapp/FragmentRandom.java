@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.cookingapp.Adapter.AdapterRandomFood;
 import com.example.cookingapp.Model.Food;
@@ -35,11 +36,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class FragmentRandom extends Fragment {
+public class FragmentRandom extends Fragment implements AdapterRandomFood.OnItemClickListener{
 
     private ViewPager2 viewPager2;
     private ArrayList<Food> randomFoodList;
-    private MaterialCardView materialCardView;
     private FirebaseFirestore firestore;
     private ArrayList<String> foodKeyList;
 
@@ -61,7 +61,6 @@ public class FragmentRandom extends Fragment {
         View view = inflater.inflate(R.layout.fragment_random, container, false);
 
         viewPager2 = view.findViewById(R.id.viewPagerImageSlider);
-        materialCardView = view.findViewById(R.id.materialCardView);
 
         retrieveFood();
 
@@ -69,7 +68,7 @@ public class FragmentRandom extends Fragment {
     }
 
     private void updateView(){
-        viewPager2.setAdapter(new AdapterRandomFood(randomFoodList, viewPager2));
+        viewPager2.setAdapter(new AdapterRandomFood(randomFoodList, viewPager2, this));
 
         viewPager2.setClipToPadding(false);
         viewPager2.setClipChildren(false);
@@ -86,34 +85,6 @@ public class FragmentRandom extends Fragment {
             }
         });
         viewPager2.setPageTransformer(compositePageTransformer);
-
-        viewPager2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext(), ActitvityFoodDetail.class);
-                Food food = (Food) randomFoodList.get(viewPager2.getCurrentItem());
-                intent.putExtra("foodKey", food.getFoodKey());
-                intent.putExtra("foodName", food.getFoodName());
-                intent.putExtra("foodCate", food.getFoodCate());
-                intent.putExtra("cookingSteps", food.getCookingSteps());
-                intent.putExtra("foodURL", food.getFoodURL());
-                startActivity(intent);
-            }
-        });
-    }
-
-    public ArrayList<Food> RandomFood(){
-        randomFoodList.clear();
-
-        randomFoodList.add(new Food("Bánh Canh", R.drawable.banhcanh));
-        randomFoodList.add(new Food("Bánh Khọt", R.drawable.banhkhot));
-        randomFoodList.add(new Food("Bánh Mì", R.drawable.banhmi));
-        randomFoodList.add(new Food("Bánh Xèo", R.drawable.banhxeo));
-        randomFoodList.add(new Food("Bún Bò", R.drawable.bunbo));
-        randomFoodList.add(new Food("Cơm Tấm", R.drawable.comtam));
-        randomFoodList.add(new Food("Phở", R.drawable.pho));
-
-        return randomFoodList;
     }
 
     private void retrieveFood(){
@@ -153,5 +124,17 @@ public class FragmentRandom extends Fragment {
                         }
                     }
                 });
+    }
+
+    @Override
+    public void OnItemClick(int position) {
+        Intent intent = new Intent(getContext(), ActitvityFoodDetail.class);
+        Food food = (Food) randomFoodList.get(viewPager2.getCurrentItem());
+        intent.putExtra("foodKey", food.getFoodKey());
+        intent.putExtra("foodName", food.getFoodName());
+        intent.putExtra("foodCate", food.getFoodCate());
+        intent.putExtra("cookingSteps", food.getCookingSteps());
+        intent.putExtra("foodURL", food.getFoodURL());
+        startActivity(intent);
     }
 }
