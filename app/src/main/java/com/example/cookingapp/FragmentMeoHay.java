@@ -2,6 +2,7 @@ package com.example.cookingapp;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,9 +11,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.cookingapp.Adapter.AdapterMeoHay;
 import com.example.cookingapp.Model.Tips;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,6 +74,7 @@ public class FragmentMeoHay extends Fragment {
 
     private RecyclerView recyclerViewMain;
     private AdapterMeoHay adapterMain;
+    private ArrayList<Tips> listTips;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -77,23 +86,25 @@ public class FragmentMeoHay extends Fragment {
         adapterMain = new AdapterMeoHay(this.getContext());
         recyclerViewMain.setAdapter(adapterMain);
 
+        listTips = new ArrayList<Tips>();
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
         recyclerViewMain.setLayoutManager(linearLayoutManager);
 
-        adapterMain.setData(getListItem());
+        getListItem();
+        //adapterMain.setData(getListItem());
 
         return viewMain;
     }
 
-    private List<Tips> getListItem() {
-        List<Tips> listTips = new ArrayList<Tips>();
-
-        listTips.add(new Tips(R.drawable.ic_launcher_background, "Mẹo 1", "Mô tả 1"));
-        listTips.add(new Tips(R.drawable.ic_launcher_background, "Mẹo 2", "Mô tả 2"));
-        listTips.add(new Tips(R.drawable.ic_launcher_background, "Mẹo 3", "Mô tả 3"));
-        listTips.add(new Tips(R.drawable.ic_launcher_background, "Mẹo 4", "Mô tả 4"));
-        listTips.add(new Tips(R.drawable.ic_launcher_background, "Mẹo 5", "Mô tả 5"));
-
-        return listTips;
+    private void getListItem() {
+        FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+        firebaseFirestore.collection("Tips").get().addOnCompleteListener(task -> {
+            for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
+                Tips tips = new Tips(documentSnapshot.getString("tipTitle"), documentSnapshot.getString("tipDescription"), documentSnapshot.getString("tipURL"));
+                listTips.add(tips);
+                adapterMain.setData(listTips);
+            }
+        }).addOnFailureListener(e -> Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show());
     }
 }

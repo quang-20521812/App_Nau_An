@@ -7,9 +7,11 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 public class ActivityMeoHay extends AppCompatActivity {
-    private int resourceID;
-    private String title, description;
+    //private int resourceID;
+    private String title, description, url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,12 +23,12 @@ public class ActivityMeoHay extends AppCompatActivity {
         TextView textViewDesMain = (TextView) findViewById(R.id.textViewDesActivityMeoHay);
 
         Intent intent = getIntent();
-        resourceID = intent.getIntExtra("key_Image", 0);
-        title = intent.getStringExtra("key_Title");
-        description = intent.getStringExtra("key_Description");
+        title = intent.getStringExtra("tipTitle");
+        description = intent.getStringExtra("tipDescription");
+        url = intent.getStringExtra("tipURL");
 
-        imageViewMain.setImageResource(resourceID);
         textViewTitleMain.setText(title);
         textViewDesMain.setText(description);
+        Picasso.get().load(url).into(imageViewMain);
     }
 }

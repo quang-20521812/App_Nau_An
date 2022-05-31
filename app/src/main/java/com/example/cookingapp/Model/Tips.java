@@ -1,26 +1,18 @@
 package com.example.cookingapp.Model;
 
 public class Tips {
-    private int resourceID;
     private String title;
     private String description;
-
-    public Tips(int resourceID, String title, String description) {
-        this.resourceID = resourceID;
-        this.title = title;
-        this.description = description;
-    }
+    private String tipURL;
 
     public Tips() {
 
     }
 
-    public int getResourceID() {
-        return resourceID;
-    }
-
-    public void setResourceID(int resourceID) {
-        this.resourceID = resourceID;
+    public Tips(String title, String description, String tipURL) {
+        this.title = title;
+        this.description = description;
+        this.tipURL = tipURL;
     }
 
     public String getTitle() {
@@ -37,5 +29,13 @@ public class Tips {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getTipURL() {
+        return tipURL;
+    }
+
+    public void setTipURL(String tipURL) {
+        this.tipURL = tipURL;
     }
 }

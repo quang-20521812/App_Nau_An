@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.cookingapp.ActivityMeoHay;
 import com.example.cookingapp.Model.Tips;
 import com.example.cookingapp.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -45,16 +46,16 @@ public class AdapterMeoHay extends RecyclerView.Adapter<AdapterMeoHay.ItemViewHo
             return;
         }
 
-        holder.imageViewDisplay.setImageResource(tips.getResourceID());
+        Picasso.get().load(tips.getTipURL()).into(holder.imageViewDisplay);
         holder.textViewDisplay.setText(tips.getTitle());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, ActivityMeoHay.class);
-                intent.putExtra("key_Image", tips.getResourceID());
-                intent.putExtra("key_Title", tips.getTitle());
-                intent.putExtra("key_Description", tips.getDescription());
+                intent.putExtra("tipTitle", tips.getTitle());
+                intent.putExtra("tipDescription", tips.getDescription());
+                intent.putExtra("tipURL", tips.getTipURL());
                 mContext.startActivity(intent);
             }
         });
