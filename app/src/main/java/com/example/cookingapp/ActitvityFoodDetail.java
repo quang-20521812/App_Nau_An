@@ -2,13 +2,21 @@ package com.example.cookingapp;
 
 import static android.content.ContentValues.TAG;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TabHost;
 import android.widget.Toast;
 
@@ -28,6 +36,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class ActitvityFoodDetail extends AppCompatActivity {
@@ -39,6 +48,7 @@ public class ActitvityFoodDetail extends AppCompatActivity {
     ListView lvIngredient;
     ListView lvCookingStep;
     Button btnBack;
+    Button btnAdd;
     Food food;
 
     @Override
@@ -97,12 +107,78 @@ public class ActitvityFoodDetail extends AppCompatActivity {
 
     private void setupView() {
         btnBack = findViewById(R.id.btnBack);
+        btnAdd = findViewById(R.id.btnAddToMenu);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
         });
+
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openOptionDialog(Gravity.CENTER);
+            }
+        });
+    }
+
+    private void openOptionDialog(int gravity) {
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.option_dialog_layout);
+
+        Window window = dialog.getWindow();
+        if (window == null) {
+            return;
+        }
+
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        WindowManager.LayoutParams windowAttributes = window.getAttributes();
+        windowAttributes.gravity = gravity;
+        window.setAttributes(windowAttributes);
+
+        dialog.setCancelable(true);
+
+        // Setup View Dialog
+        Spinner spnCategoryDay = (Spinner) dialog.findViewById(R.id.spnCategoryDay);
+        Spinner spnCategoryTime = (Spinner) dialog.findViewById(R.id.spnCategoryTime);
+        Button btnConfirm = (Button) dialog.findViewById(R.id.btnConfirmAddToMenu);
+        Button btnCancle = (Button) dialog.findViewById(R.id.btnCancelAddToMenu);
+
+        ArrayList<String> listDay = new ArrayList<String>();
+        listDay.add("Hôm nay");
+        listDay.add("Ngày mai");
+        listDay.add("Ngày kia");
+        ArrayAdapter<String> adapterDay = new ArrayAdapter(this, android.R.layout.simple_spinner_item, listDay);
+        adapterDay.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
+        spnCategoryDay.setAdapter(adapterDay);
+
+        ArrayList<String> listTime = new ArrayList<String>();
+        listTime.add("Buổi sáng");
+        listTime.add("Buổi trưa");
+        listTime.add("Buổi tối");
+        ArrayAdapter<String> adapterTime = new ArrayAdapter(this, android.R.layout.simple_spinner_item, listTime);
+        adapterTime.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
+        spnCategoryTime.setAdapter(adapterTime);
+
+        btnCancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        btnConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        dialog.show();
     }
 
     private void setuptabCookingStep() {
