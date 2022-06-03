@@ -66,23 +66,8 @@ public class IngredientBag extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_ingredient_bag, container, false);
 
-//        list1.add(new Ingredient("beef","Bo","g",200));
-//        list1.add(new Ingredient("veg","Rau","bo",1));
-//        list1.add(new Ingredient("salt","Muoi","muong",3));
-//        list1.add(new Ingredient("pork","Heo","g",300));
-//
-//        list2.add(new Ingredient("beef","Bo","g",700));
-//        list2.add(new Ingredient("sugar","Duong","muong",2));
-//        list2.add(new Ingredient("veg","Rau","bo",1));
-//        list2.add(new Ingredient("veg","Rau","bo",6));
-//
-//        f.add(new Food("f1","Bo Heo","", list1,string,0));
-
         listView = v.findViewById(R.id.listIng);
         shoppingBag = new ShoppingBag();
-//        adapterShoppingBag = new AdapterShoppingBag(shoppingBag);
-//        listView.setAdapter(adapterShoppingBag);
-//        adapterShoppingBag.notifyDataSetChanged();
 
         getListFood();
 
@@ -93,8 +78,10 @@ public class IngredientBag extends Fragment {
 
     private void getListFood() {
         firestore = FirebaseFirestore.getInstance();
-        CollectionReference getListFoodID = firestore.collection("User")
-                .document(username).collection("MenuFood");
+        CollectionReference getListFoodID = firestore
+                .collection("User")
+                .document(username)
+                .collection("MenuFood");
         getListFoodID.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             List<String> groupFood;
 
@@ -141,13 +128,10 @@ public class IngredientBag extends Fragment {
                                             ingredients.get("ingUnit").toString(),
                                             Integer.parseInt(ingredients.get("ingQuantity").toString())));
                                 }
-//                                ingredientsArrayList.add(ingredientTempArrayList);
                                 shoppingBag.addFood(ingredientTempArrayList);
                                 updateListView();
                             }
                         }
-
-
                     }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {

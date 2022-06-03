@@ -12,16 +12,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.cookingapp.MainActivity;
 import com.example.cookingapp.Model.Food;
 import com.example.cookingapp.R;
+import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Adapter_SelectedFood extends RecyclerView.Adapter<Adapter_SelectedFood.FoodViewHolder> {
 
-    private List<Food> foodList;
+    private ArrayList<Food> foodList;
 
 
 
-    public void setFoodList(List<Food> a){
+    public void setFoodList(ArrayList<Food> a){
         this.foodList = a;
         notifyDataSetChanged();
     }
@@ -38,7 +40,7 @@ public class Adapter_SelectedFood extends RecyclerView.Adapter<Adapter_SelectedF
         Food food = foodList.get(position);
         if (food == null)
             return;
-        holder.imgFood.setImageResource(food.getResourceID());
+        holder.setImage(foodList.get(position));
         holder.nameFood.setText(food.getFoodName());
     }
 
@@ -54,11 +56,19 @@ public class Adapter_SelectedFood extends RecyclerView.Adapter<Adapter_SelectedF
         private ImageView imgFood;
         private TextView nameFood;
 
+
+
         public FoodViewHolder(@NonNull View itemView) {
             super(itemView);
 
             imgFood = itemView.findViewById(R.id.imageFood);
             nameFood = itemView.findViewById(R.id.nameFood);
+
+
+        }
+
+        void setImage(Food food){
+            Picasso.get().load(food.getFoodURL()).into(imgFood);
         }
     }
 }
