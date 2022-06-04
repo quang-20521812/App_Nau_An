@@ -13,8 +13,10 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -106,6 +108,21 @@ public class SignUpScreen extends AppCompatActivity {
                                     Toast.makeText(SignUpScreen.this, "Đăng ký thất bại!", Toast.LENGTH_LONG).show();
                                 }
                             });
+
+                    String[] days = new String[]{"hom_nay", "ngay_mai", "ngay_kia"};
+                    Map<String, Object> Menu = new HashMap<>();
+                    Menu.put("sang", Arrays.asList("null"));
+                    Menu.put("trua", Arrays.asList("null"));
+                    Menu.put("toi", Arrays.asList("null"));
+
+                    for (String day : days) {
+                        firestore
+                                .collection("User")
+                                .document(username)
+                                .collection("MenuFood")
+                                .document(day)
+                                .set(Menu);
+                    }
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         finish();
                 }

@@ -81,28 +81,28 @@ public class ActitvityFoodDetail extends AppCompatActivity {
         firestore = FirebaseFirestore.getInstance();
 
         ArrayList<Ingredient> ingredientArrayList = new ArrayList<>();
-        firestore.collection("Food").document(foodKey)
-                .collection("ingredients")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Map<String, Object> ingredients = document.getData();
-                                ingredientArrayList.add(new Ingredient(document.getId(),
-                                        ingredients.get("ingName").toString(),
-                                        ingredients.get("ingUnit").toString(),
-                                        Integer.parseInt(ingredients.get("ingQuantity").toString())));
+            firestore.collection("Food").document(foodKey)
+                    .collection("ingredients")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    Map<String, Object> ingredients = document.getData();
+                                    ingredientArrayList.add(new Ingredient(document.getId(),
+                                            ingredients.get("ingName").toString(),
+                                            ingredients.get("ingUnit").toString(),
+                                            Integer.parseInt(ingredients.get("ingQuantity").toString())));
+                                }
+                                food.setIngredients(ingredientArrayList);
+                                setupTabIngredient();
+                                setuptabCookingStep();
+                            } else {
+                                Log.d(TAG, "Error getting documents: ", task.getException());
                             }
-                            food.setIngredients(ingredientArrayList);
-                            setupTabIngredient();
-                            setuptabCookingStep();
-                        } else {
-                            Log.d(TAG, "Error getting documents: ", task.getException());
                         }
-                    }
-                });
+                    });
 
     }
 

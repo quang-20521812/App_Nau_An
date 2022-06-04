@@ -33,7 +33,9 @@ public class FragmentMainPage extends Fragment implements Adapter_SelectedFood.O
 
     int tabDayPos;
     TabHost tabHost;
-    Adapter_SelectedFood adapter_selectedFood;
+    Adapter_SelectedFood adapter_selectedFoodMorning;
+    Adapter_SelectedFood adapter_selectedFoodNoon;
+    Adapter_SelectedFood adapter_selectedFoodEvening;
     RecyclerView rcv_selectedFoodTabMorning, rcv_selectedFoodTabNoon, rcv_selectedFoodTabEvening;
     FirebaseFirestore firestore;
     ArrayList<String> listFoodIDMorning;
@@ -66,14 +68,14 @@ public class FragmentMainPage extends Fragment implements Adapter_SelectedFood.O
         rcv_selectedFoodTabNoon = v.findViewById(R.id.rcv_selectedFoodTabNoon);
         rcv_selectedFoodTabEvening = v.findViewById(R.id.rcv_selectedFoodTabEvening);
         tabHost = v.findViewById(R.id.tabHost);
-        adapter_selectedFood = new Adapter_SelectedFood();
+        adapter_selectedFoodMorning = new Adapter_SelectedFood();
+        adapter_selectedFoodNoon = new Adapter_SelectedFood();
+        adapter_selectedFoodEvening = new Adapter_SelectedFood();
 
         tabHost.setup();
         createTabs();
 
         setupTabBreakfast();
-        setupTabLunch();
-        setupTabDinner();
 
         tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
@@ -98,24 +100,24 @@ public class FragmentMainPage extends Fragment implements Adapter_SelectedFood.O
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
         rcv_selectedFoodTabMorning.setLayoutManager(linearLayoutManager);
 
-        adapter_selectedFood.setFoodList(listFoodItemMorning, this, "sang");
-        rcv_selectedFoodTabMorning.setAdapter(adapter_selectedFood);
+        adapter_selectedFoodMorning.setFoodList(listFoodItemMorning, this, "sang");
+        rcv_selectedFoodTabMorning.setAdapter(adapter_selectedFoodMorning);
     }
 
     private void setupTabLunch() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
         rcv_selectedFoodTabNoon.setLayoutManager(linearLayoutManager);
 
-        adapter_selectedFood.setFoodList(listFoodItemNoon, this, "trua");
-        rcv_selectedFoodTabNoon.setAdapter(adapter_selectedFood);
+        adapter_selectedFoodNoon.setFoodList(listFoodItemNoon, this, "trua");
+        rcv_selectedFoodTabNoon.setAdapter(adapter_selectedFoodNoon);
     }
 
     private void setupTabDinner() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
         rcv_selectedFoodTabEvening.setLayoutManager(linearLayoutManager);
 
-        adapter_selectedFood.setFoodList(listFoodItemEvening, this, "toi");
-        rcv_selectedFoodTabEvening.setAdapter(adapter_selectedFood);
+        adapter_selectedFoodEvening.setFoodList(listFoodItemEvening, this, "toi");
+        rcv_selectedFoodTabEvening.setAdapter(adapter_selectedFoodEvening);
     }
 
     private void createTabs() {
@@ -200,54 +202,54 @@ public class FragmentMainPage extends Fragment implements Adapter_SelectedFood.O
         }
 
         for (String ID : listFoodID) {
+
             DocumentReference documentReference = firestore
                     .collection("Food")
                     .document(ID);
 
-                    documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            if (task.isSuccessful()) {
-                                DocumentSnapshot document = task.getResult();
-                                if (document.exists()) {
-                                    //CookingSteps
-                                    ArrayList<String> cookingSteps = (ArrayList<String>) document.get("cookingSteps");
-                                    //AddToFoodList
-                                    if (time == "sang") {
-                                        listFoodItemMorning.add(new Food(document.getId(),
-                                                document.getString("foodName"),
-                                                document.getString("foodCate"),
-                                                new ArrayList<Ingredient>(),
-                                                cookingSteps,
-                                                document.getString("foodURL")));
-                                        setupTabBreakfast();
-                                    }
-                                    else if (time == "trua"){
-                                        listFoodItemNoon.add(new Food(document.getId(),
-                                                document.getString("foodName"),
-                                                document.getString("foodCate"),
-                                                new ArrayList<Ingredient>(),
-                                                cookingSteps,
-                                                document.getString("foodURL")));
-                                        setupTabLunch();
-                                    }
-                                    else {
-                                        listFoodItemEvening.add(new Food(document.getId(),
-                                                document.getString("foodName"),
-                                                document.getString("foodCate"),
-                                                new ArrayList<Ingredient>(),
-                                                cookingSteps,
-                                                document.getString("foodURL")));
-                                        setupTabLunch();
-                                    }
-                                } else {
-                                    Log.d(TAG, "No such document");
-                                }
+            documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            //CookingSteps
+                            ArrayList<String> cookingSteps = (ArrayList<String>) document.get("cookingSteps");
+                            //AddToFoodList
+                            if (time == "sang") {
+                                listFoodItemMorning.add(new Food(document.getId(),
+                                        document.getString("foodName"),
+                                        document.getString("foodCate"),
+                                        new ArrayList<Ingredient>(),
+                                        cookingSteps,
+                                        document.getString("foodURL")));
+                                setupTabBreakfast();
+                            } else if (time == "trua") {
+                                listFoodItemNoon.add(new Food(document.getId(),
+                                        document.getString("foodName"),
+                                        document.getString("foodCate"),
+                                        new ArrayList<Ingredient>(),
+                                        cookingSteps,
+                                        document.getString("foodURL")));
+                                setupTabLunch();
                             } else {
-                                Log.d(TAG, "get failed with ", task.getException());
+                                listFoodItemEvening.add(new Food(document.getId(),
+                                        document.getString("foodName"),
+                                        document.getString("foodCate"),
+                                        new ArrayList<Ingredient>(),
+                                        cookingSteps,
+                                        document.getString("foodURL")));
+                                setupTabLunch();
                             }
+                        } else {
+                            Log.d(TAG, "No such document");
                         }
-                    });
+                    } else {
+                        Log.d(TAG, "get failed with ", task.getException());
+                    }
+                }
+            });
+
         }
     }
 
