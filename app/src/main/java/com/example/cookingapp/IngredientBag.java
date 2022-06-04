@@ -10,7 +10,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cookingapp.Adapter.AdapterShoppingBag;
@@ -38,12 +40,8 @@ import java.util.Map;
 public class IngredientBag extends Fragment {
 
     ArrayList<String> listFoodID = new ArrayList<>();
-    String username = "anhquan";
+    String username = "lephuc";
     FirebaseFirestore firestore;
-    ArrayList<Ingredient> ingredients = new ArrayList<>();
-    ArrayList<ArrayList<Ingredient>> ingredientsArrayList = new ArrayList<>();
-    String[] string = new String[]{};
-    ArrayList<Food> food = new ArrayList<>();
     AdapterShoppingBag adapterShoppingBag;
     ShoppingBag shoppingBag;
     ListView listView;
@@ -55,9 +53,6 @@ public class IngredientBag extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //get foodList in bag
-
-        List<String> listFoodID = new ArrayList<String>() ;
     }
 
     @Override
@@ -70,7 +65,6 @@ public class IngredientBag extends Fragment {
         shoppingBag = new ShoppingBag();
 
         getListFood();
-
 
 
         return v;
@@ -90,15 +84,18 @@ public class IngredientBag extends Fragment {
                 for (DocumentSnapshot document : task.getResult()) {
                     groupFood = (List<String>) document.get("sang");
                     for (int i = 0; i < groupFood.size(); i++) {
-                        listFoodID.add(groupFood.get(i));
+                        if (groupFood.get(i) != "null")
+                            listFoodID.add(groupFood.get(i));
                     }
                     groupFood = (List<String>) document.get("trua");
                     for (int i = 0; i < groupFood.size(); i++) {
-                        listFoodID.add(groupFood.get(i));
+                        if (groupFood.get(i) != "null")
+                            listFoodID.add(groupFood.get(i));
                     }
                     groupFood = (List<String>) document.get("toi");
                     for (int i = 0; i < groupFood.size(); i++) {
-                        listFoodID.add(groupFood.get(i));
+                        if (groupFood.get(i) != "null")
+                            listFoodID.add(groupFood.get(i));
                     }
                 }
                 getIngerdients(listFoodID);

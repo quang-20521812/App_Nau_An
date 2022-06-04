@@ -44,7 +44,7 @@ public class FragmentMainPage extends Fragment implements Adapter_SelectedFood.O
     ArrayList<Food> listFoodItemMorning;
     ArrayList<Food> listFoodItemNoon;
     ArrayList<Food> listFoodItemEvening;
-    String username = "anhquan";
+    String username = "lephuc";
     public FragmentMainPage(int tabDayPos) {
         this.tabDayPos = tabDayPos;
     }
@@ -202,54 +202,54 @@ public class FragmentMainPage extends Fragment implements Adapter_SelectedFood.O
         }
 
         for (String ID : listFoodID) {
+            if (ID != "null") {
+                DocumentReference documentReference = firestore
+                        .collection("Food")
+                        .document(ID);
 
-            DocumentReference documentReference = firestore
-                    .collection("Food")
-                    .document(ID);
-
-            documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    if (task.isSuccessful()) {
-                        DocumentSnapshot document = task.getResult();
-                        if (document.exists()) {
-                            //CookingSteps
-                            ArrayList<String> cookingSteps = (ArrayList<String>) document.get("cookingSteps");
-                            //AddToFoodList
-                            if (time == "sang") {
-                                listFoodItemMorning.add(new Food(document.getId(),
-                                        document.getString("foodName"),
-                                        document.getString("foodCate"),
-                                        new ArrayList<Ingredient>(),
-                                        cookingSteps,
-                                        document.getString("foodURL")));
-                                setupTabBreakfast();
-                            } else if (time == "trua") {
-                                listFoodItemNoon.add(new Food(document.getId(),
-                                        document.getString("foodName"),
-                                        document.getString("foodCate"),
-                                        new ArrayList<Ingredient>(),
-                                        cookingSteps,
-                                        document.getString("foodURL")));
-                                setupTabLunch();
+                documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                //CookingSteps
+                                ArrayList<String> cookingSteps = (ArrayList<String>) document.get("cookingSteps");
+                                //AddToFoodList
+                                if (time == "sang" && document.getId() != "null") {
+                                    listFoodItemMorning.add(new Food(document.getId(),
+                                            document.getString("foodName"),
+                                            document.getString("foodCate"),
+                                            new ArrayList<Ingredient>(),
+                                            cookingSteps,
+                                            document.getString("foodURL")));
+                                    setupTabBreakfast();
+                                } else if (time == "trua" && document.getId() != "null") {
+                                    listFoodItemNoon.add(new Food(document.getId(),
+                                            document.getString("foodName"),
+                                            document.getString("foodCate"),
+                                            new ArrayList<Ingredient>(),
+                                            cookingSteps,
+                                            document.getString("foodURL")));
+                                    setupTabLunch();
+                                } else if (time == "toi" && document.getId() != "null") {
+                                    listFoodItemEvening.add(new Food(document.getId(),
+                                            document.getString("foodName"),
+                                            document.getString("foodCate"),
+                                            new ArrayList<Ingredient>(),
+                                            cookingSteps,
+                                            document.getString("foodURL")));
+                                    setupTabLunch();
+                                }
                             } else {
-                                listFoodItemEvening.add(new Food(document.getId(),
-                                        document.getString("foodName"),
-                                        document.getString("foodCate"),
-                                        new ArrayList<Ingredient>(),
-                                        cookingSteps,
-                                        document.getString("foodURL")));
-                                setupTabLunch();
+                                Log.d(TAG, "No such document");
                             }
                         } else {
-                            Log.d(TAG, "No such document");
+                            Log.d(TAG, "get failed with ", task.getException());
                         }
-                    } else {
-                        Log.d(TAG, "get failed with ", task.getException());
                     }
-                }
-            });
-
+                });
+            }
         }
     }
 

@@ -34,31 +34,34 @@
             android:layout_height="wrap_content"
             app:defaultNavHost="true"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"></fragment>
+            app:layout_constraintTop_toTopOf="parent"
+            app:flow_verticalBias="2"></fragment>
 
         <TextView
+            android:id="@+id/tvRandomFood"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginStart="110dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginStart="108dp"
+            android:layout_marginBottom="4dp"
             android:fontFamily="@font/poppinsr"
             android:paddingTop="6dp"
             android:text="Món ăn gợi ý cho bạn"
             android:textColor="@color/black"
             android:textSize="18dp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/NavHost" />
+            app:layout_constraintBottom_toTopOf="@+id/FrameRandomFood"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <FrameLayout
-            android:id="@+id/firstFrame"
+            android:id="@+id/FrameRandomFood"
             android:layout_width="match_parent"
-            android:layout_height="220dp"
+            android:layout_height="200dp"
             android:layout_marginTop="50dp"
             android:layout_weight="1"
+            app:layout_constraintBottom_toTopOf="@+id/bottomNav"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/NavHost" />
+            app:layout_constraintVertical_bias="1.0" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNav"

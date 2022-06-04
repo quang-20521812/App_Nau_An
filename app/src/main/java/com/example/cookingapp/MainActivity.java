@@ -3,31 +3,18 @@ package com.example.cookingapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
-import androidx.navigation.NavHost;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.LinearLayout;
-import android.widget.Toast;
+import android.view.View;
 
-import com.example.cookingapp.Adapter.Adapter_SelectedFood;
-import com.example.cookingapp.Model.Food;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -57,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentRandom fragmentRandom = new FragmentRandom();
         IngredientBag fragmentIngredient = new IngredientBag();
         getSupportFragmentManager().beginTransaction().replace(R.id.NavHost, fragmentTab).commit();
-        getSupportFragmentManager().beginTransaction().add(R.id.firstFrame, fragmentRandom).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.FrameRandomFood, fragmentRandom).commit();
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -65,14 +52,20 @@ public class MainActivity extends AppCompatActivity {
                 int id = item.getItemId();
                 switch (id){
                     case R.id.home_bot_nav:{
+                        (findViewById(R.id.FrameRandomFood)).setVisibility(View.VISIBLE);
+                        (findViewById(R.id.tvRandomFood)).setVisibility(View.VISIBLE);
                         getSupportFragmentManager().beginTransaction().replace(R.id.NavHost, fragmentTab).commit();
                         break;
                     }
                     case R.id.shopping_bot_nav:{
+                        (findViewById(R.id.FrameRandomFood)).setVisibility(View.INVISIBLE);
+                        (findViewById(R.id.tvRandomFood)).setVisibility(View.INVISIBLE);
                         getSupportFragmentManager().beginTransaction().replace(R.id.NavHost, fragmentIngredient).commit();
                         break;
                     }
                     case R.id.tips_bot_nav:{
+                        (findViewById(R.id.FrameRandomFood)).setVisibility(View.INVISIBLE);
+                        (findViewById(R.id.tvRandomFood)).setVisibility(View.INVISIBLE);
                         getSupportFragmentManager().beginTransaction().replace(R.id.NavHost, fragmentMeoHay).commit();
                         break;
                     }

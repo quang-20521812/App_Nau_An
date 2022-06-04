@@ -62,7 +62,7 @@ public class ActitvityFoodDetail extends AppCompatActivity {
     Boolean isDelete;
     String day;
     String time;
-    String username = "anhquan";
+    String username = "lephuc";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
