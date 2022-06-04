@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     NavigationView navigationView;
     BottomNavigationView bottomNavigationView;
+    String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,11 +31,21 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("HÔM NAY ĂN GÌ?");
 
+        retrieveUsername();
+
         setupDrawerNavigationView();
 
         setupBottomNavigationView();
     }
 
+    private void retrieveUsername() {
+        Intent intent = getIntent();
+        username = intent.getStringExtra("username");
+    }
+
+    public String getUsername(){
+        return username;
+    }
 
     private void setupBottomNavigationView() {
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNav);
@@ -85,7 +96,9 @@ public class MainActivity extends AppCompatActivity {
         navigationView.getMenu().getItem(0).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
-                startActivity(new Intent(MainActivity.this, ActivitySearching.class));
+                Intent intent = new Intent(MainActivity.this, ActivitySearching.class);
+                intent.putExtra("username", username);
+                startActivity(intent);
                 return true;
             }
         });
@@ -95,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem menuItem) {
                 Intent intent = new Intent(getApplicationContext(), ActivityNavigationFood.class);
                 intent.putExtra("foodCate", "all");
+                intent.putExtra("username", username);
                 startActivity(intent);
                 return true;
             }
@@ -105,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem menuItem) {
                 Intent intent = new Intent(getApplicationContext(), ActivityNavigationFood.class);
                 intent.putExtra("foodCate", "simple");
+                intent.putExtra("username", username);
                 startActivity(intent);
                 return true;
             }
@@ -115,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem menuItem) {
                 Intent intent = new Intent(getApplicationContext(), ActivityNavigationFood.class);
                 intent.putExtra("foodCate", "saving");
+                intent.putExtra("username", username);
                 startActivity(intent);
                 return true;
             }
@@ -125,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem menuItem) {
                 Intent intent = new Intent(getApplicationContext(), ActivityNavigationFood.class);
                 intent.putExtra("foodCate", "snack");
+                intent.putExtra("username", username);
                 startActivity(intent);
                 return true;
             }
@@ -135,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem menuItem) {
                 Intent intent = new Intent(getApplicationContext(), ActivityNavigationFood.class);
                 intent.putExtra("foodCate", "veg");
+                intent.putExtra("username", username);
                 startActivity(intent);
                 return true;
             }
@@ -145,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem menuItem) {
                 Intent intent = new Intent(getApplicationContext(), ActivityNavigationFood.class);
                 intent.putExtra("foodCate", "healthy");
+                intent.putExtra("username", username);
                 startActivity(intent);
                 return true;
             }

@@ -6,7 +6,8 @@
     android:paddingHorizontal="5dp"
     android:layout_marginBottom="15dp"
     android:ignoreGravity="@id/cardViewTitle"
-    android:descendantFocusability="blocksDescendants">
+    android:descendantFocusability="blocksDescendants"
+    android:paddingBottom="8dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewTitle"

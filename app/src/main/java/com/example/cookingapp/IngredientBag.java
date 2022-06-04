@@ -40,7 +40,7 @@ import java.util.Map;
 public class IngredientBag extends Fragment {
 
     ArrayList<String> listFoodID = new ArrayList<>();
-    String username = "lephuc";
+    String username;
     FirebaseFirestore firestore;
     AdapterShoppingBag adapterShoppingBag;
     ShoppingBag shoppingBag;
@@ -61,6 +61,8 @@ public class IngredientBag extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_ingredient_bag, container, false);
 
+        retrieveUsername();
+
         listView = v.findViewById(R.id.listIng);
         shoppingBag = new ShoppingBag();
 
@@ -68,6 +70,10 @@ public class IngredientBag extends Fragment {
 
 
         return v;
+    }
+
+    private void retrieveUsername() {
+        username = ((MainActivity) getActivity()).getUsername();
     }
 
     private void getListFood() {

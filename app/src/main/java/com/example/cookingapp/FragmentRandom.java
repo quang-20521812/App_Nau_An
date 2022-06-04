@@ -42,6 +42,7 @@ public class FragmentRandom extends Fragment implements AdapterRandomFood.OnItem
     private ArrayList<Food> randomFoodList;
     private FirebaseFirestore firestore;
     private ArrayList<String> foodKeyList;
+    String username;
 
     public FragmentRandom() {
         // Required empty public constructor
@@ -60,11 +61,17 @@ public class FragmentRandom extends Fragment implements AdapterRandomFood.OnItem
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_random, container, false);
 
+        retrieveUsername();
+
         viewPager2 = view.findViewById(R.id.viewPagerImageSlider);
 
         retrieveFood();
 
         return view;
+    }
+
+    private void retrieveUsername() {
+        username = ((MainActivity) getActivity()).getUsername();
     }
 
     private void updateView(){
@@ -135,6 +142,7 @@ public class FragmentRandom extends Fragment implements AdapterRandomFood.OnItem
         intent.putExtra("foodCate", food.getFoodCate());
         intent.putExtra("cookingSteps", food.getCookingSteps());
         intent.putExtra("foodURL", food.getFoodURL());
+        intent.putExtra("username", username);
         startActivity(intent);
     }
 }

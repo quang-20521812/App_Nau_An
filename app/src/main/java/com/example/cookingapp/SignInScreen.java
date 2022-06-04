@@ -58,7 +58,7 @@ public class SignInScreen extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 DocumentSnapshot document = task.getResult();
                                 if (document.exists()) {
-                                    signIn(password,document.get("country").toString());
+                                    signIn(password,document.get("Password").toString());
                                 } else {
                                     wrongUsername();
                                 }
@@ -82,7 +82,10 @@ public class SignInScreen extends AppCompatActivity {
     private void signIn(String passwordInput, String password){
         if(passwordInput.compareTo(password) == 0)
         {
-            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+            Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+            String username = editTextUsername.getText().toString();
+            intent.putExtra("username", username);
+            startActivity(intent);
         }
         else {
             txtCheckPassword.setText("Mật khẩu bạn nhập vào chưa đúng!");

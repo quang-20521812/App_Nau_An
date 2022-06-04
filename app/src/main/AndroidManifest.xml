@@ -16,7 +16,7 @@
             android:name=".ActitvityFoodDetail"
             android:exported="false" />
         <activity
-            android:name=".SignInScreen"
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".ActivityNavigationFood"
@@ -31,7 +31,7 @@
             android:name=".ActivitySearching"
             android:exported="false"/>
         <activity
-            android:name=".MainActivity"
+            android:name=".SignInScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

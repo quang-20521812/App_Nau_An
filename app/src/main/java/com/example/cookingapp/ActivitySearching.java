@@ -33,11 +33,14 @@ public class ActivitySearching extends AppCompatActivity {
     private GridView gridViewSearchingItem;
     private AdapterSearching_Item adapterSearching_item;
     private List<Food> listFoods;
+    String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_searching);
+
+        retrieveUsername();
 
         searchViewMain = (androidx.appcompat.widget.SearchView) findViewById(R.id.searchViewMain);
         gridViewSearchingItem = (GridView) findViewById(R.id.gridViewSearchingItem);
@@ -74,9 +77,15 @@ public class ActivitySearching extends AppCompatActivity {
                 intent.putExtra("foodCate", food.getFoodCate());
                 intent.putExtra("cookingSteps", food.getCookingSteps());
                 intent.putExtra("foodURL", food.getFoodURL());
+                intent.putExtra("username", username);
                 startActivity(intent);
             }
         });
+    }
+
+    private void retrieveUsername() {
+        Intent intent = getIntent();
+        username = intent.getStringExtra("username");
     }
 
     public void searchListFoods(String query) {

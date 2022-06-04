@@ -25,7 +25,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 public class ActivityNavigationFood extends AppCompatActivity {
 
@@ -37,16 +36,24 @@ public class ActivityNavigationFood extends AppCompatActivity {
     String foodCate;
     FirebaseFirestore firestore;
     ArrayList<String> foodKeyList = new ArrayList<>();
+    String username;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation_food);
 
+        retrieveUsername();
+
         setupView();
 
-        retriveFoodCate_FoodKey();
+        retrieveFoodCate_FoodKey();
 
+    }
+
+    private void retrieveUsername() {
+        Intent intent = getIntent();
+        username = intent.getStringExtra("username");
     }
 
     private void setupView() {
@@ -60,6 +67,7 @@ public class ActivityNavigationFood extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.putExtra("username", username);
                 startActivity(intent);
             }
         });
@@ -74,6 +82,7 @@ public class ActivityNavigationFood extends AppCompatActivity {
                 intent.putExtra("foodCate", food.getFoodCate());
                 intent.putExtra("cookingSteps", food.getCookingSteps());
                 intent.putExtra("foodURL", food.getFoodURL());
+                intent.putExtra("username", username);
                 startActivity(intent);
             }
         });
@@ -84,7 +93,7 @@ public class ActivityNavigationFood extends AppCompatActivity {
         lvFood.setAdapter(adapterNavigationFood);
     }
 
-    private void retriveFoodCate_FoodKey() {
+    private void retrieveFoodCate_FoodKey() {
         Intent intent = getIntent();
         foodCate = intent.getStringExtra("foodCate");
 

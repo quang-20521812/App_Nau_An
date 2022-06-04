@@ -44,7 +44,7 @@ public class FragmentMainPage extends Fragment implements Adapter_SelectedFood.O
     ArrayList<Food> listFoodItemMorning;
     ArrayList<Food> listFoodItemNoon;
     ArrayList<Food> listFoodItemEvening;
-    String username = "lephuc";
+    String username;
     public FragmentMainPage(int tabDayPos) {
         this.tabDayPos = tabDayPos;
     }
@@ -52,6 +52,8 @@ public class FragmentMainPage extends Fragment implements Adapter_SelectedFood.O
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        retrieveUsername();
 
         getListFoodID(tabDayPos, "sang");
         getListFoodID(tabDayPos, "trua");
@@ -62,12 +64,16 @@ public class FragmentMainPage extends Fragment implements Adapter_SelectedFood.O
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
+
         View v = inflater.inflate(R.layout.fragment_main_page, container, false);
 
         rcv_selectedFoodTabMorning = v.findViewById(R.id.rcv_selectedFoodTabMorning);
         rcv_selectedFoodTabNoon = v.findViewById(R.id.rcv_selectedFoodTabNoon);
         rcv_selectedFoodTabEvening = v.findViewById(R.id.rcv_selectedFoodTabEvening);
+
         tabHost = v.findViewById(R.id.tabHost);
+
         adapter_selectedFoodMorning = new Adapter_SelectedFood();
         adapter_selectedFoodNoon = new Adapter_SelectedFood();
         adapter_selectedFoodEvening = new Adapter_SelectedFood();
@@ -94,6 +100,10 @@ public class FragmentMainPage extends Fragment implements Adapter_SelectedFood.O
             }
         });
         return v;
+    }
+
+    private void retrieveUsername() {
+        username = ((MainActivity) getActivity()).getUsername();
     }
 
     private void setupTabBreakfast() {
@@ -266,6 +276,7 @@ public class FragmentMainPage extends Fragment implements Adapter_SelectedFood.O
         intent.putExtra("isDelete", true);
         intent.putExtra("day", tabDayPos);
         intent.putExtra("time", adapter_selectedFood.getTime());
+        intent.putExtra("username", username);
         startActivity(intent);
     }
 }
