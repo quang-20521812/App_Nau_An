@@ -30,6 +30,7 @@ import com.example.cookingapp.Model.Food;
 import com.example.cookingapp.Model.Ingredient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
@@ -58,6 +59,10 @@ public class ActitvityFoodDetail extends AppCompatActivity {
     Button btnBack;
     Button btnAdd;
     Food food;
+    Boolean isDelete;
+    String day;
+    String time;
+    String username = "anhquan";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +107,9 @@ public class ActitvityFoodDetail extends AppCompatActivity {
     }
 
     private void retriveFood() {
+
+        Button btnDel = findViewById(R.id.btnAddToMenu);
+
         Intent intent = getIntent();
         food = new Food();
         food.setFoodKey(intent.getStringExtra("foodKey"));
@@ -109,6 +117,27 @@ public class ActitvityFoodDetail extends AppCompatActivity {
         food.setFoodCate(intent.getStringExtra("foodCate"));
         food.setCookingSteps(intent.getStringArrayListExtra("cookingSteps"));
         food.setfoodURL(intent.getStringExtra("foodURL"));
+
+        isDelete = intent.getBooleanExtra("isDelete", false);
+        if (isDelete){
+            btnDel.setText("Xóa khỏi thực đơn");
+            time = intent.getStringExtra("time");
+
+            int getDay = intent.getIntExtra("day", -1);
+
+            if (getDay == 0){
+                day = "hom_nay";
+            }
+            else if (getDay == 1){
+                day = "ngay_mai";
+            }
+            else if (getDay == 2){
+                day = "ngay_kia";
+            }
+
+
+        }
+
         Picasso.get().load(food.getFoodURL()).into((ImageView) findViewById(R.id.imageViewFoodDetail));
         retriveIngredientsList(food.getFoodKey());
     }
@@ -126,7 +155,26 @@ public class ActitvityFoodDetail extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openOptionDialog(Gravity.CENTER);
+                if (isDelete){
+
+                    Intent intent = getIntent();
+                    String foodKey = intent.getStringExtra("foodKey");
+
+                    firestore = FirebaseFirestore.getInstance();
+
+                    firestore
+                            .collection("User")
+                            .document(username)
+                            .collection("MenuFood")
+                            .document(day)
+                            .update(time, FieldValue.arrayRemove(foodKey));
+
+                    Intent reloadMainActivity = new Intent(ActitvityFoodDetail.this, MainActivity.class);
+                    startActivity(reloadMainActivity);
+                }
+                else{
+                    openOptionDialog(Gravity.CENTER);
+                }
             }
         });
     }
@@ -168,6 +216,7 @@ public class ActitvityFoodDetail extends AppCompatActivity {
         listTime.add("Buổi sáng");
         listTime.add("Buổi trưa");
         listTime.add("Buổi tối");
+
         ArrayAdapter<String> adapterTime = new ArrayAdapter(this, android.R.layout.simple_spinner_item, listTime);
         adapterTime.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
         spnCategoryTime.setAdapter(adapterTime);
@@ -187,25 +236,28 @@ public class ActitvityFoodDetail extends AppCompatActivity {
                 String day = spnCategoryDay.getSelectedItem().toString();
                 String time = spnCategoryTime.getSelectedItem().toString();
 
+                Intent reloadMainActivity = new Intent(ActitvityFoodDetail.this, MainActivity.class);
+                startActivity(reloadMainActivity);
+
                 FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
 
                 if (day.equals("Hôm nay")) {
 
                     if (time.equals("Buổi sáng")) {
 
-                        firebaseFirestore.collection("User").document("anhquan").collection("MenuFood")
+                        firebaseFirestore.collection("User").document(username).collection("MenuFood")
                                 .document("hom_nay").update("sang", FieldValue.arrayUnion(foodKey));
 
                     }
                     else if (time.equals("Buổi trưa")) {
 
-                        firebaseFirestore.collection("User").document("anhquan").collection("MenuFood")
+                        firebaseFirestore.collection("User").document(username).collection("MenuFood")
                                 .document("hom_nay").update("trua", FieldValue.arrayUnion(foodKey));
 
                     }
                     else if (time.equals("Buổi tối")) {
 
-                        firebaseFirestore.collection("User").document("anhquan").collection("MenuFood")
+                        firebaseFirestore.collection("User").document(username).collection("MenuFood")
                                 .document("hom_nay").update("toi", FieldValue.arrayUnion(foodKey));
 
                     }
@@ -215,19 +267,19 @@ public class ActitvityFoodDetail extends AppCompatActivity {
 
                     if (time.equals("Buổi sáng")) {
 
-                        firebaseFirestore.collection("User").document("anhquan").collection("MenuFood")
+                        firebaseFirestore.collection("User").document(username).collection("MenuFood")
                                 .document("ngay_mai").update("sang", FieldValue.arrayUnion(foodKey));
 
                     }
                     else if (time.equals("Buổi trưa")) {
 
-                        firebaseFirestore.collection("User").document("anhquan").collection("MenuFood")
+                        firebaseFirestore.collection("User").document(username).collection("MenuFood")
                                 .document("ngay_mai").update("trua", FieldValue.arrayUnion(foodKey));
 
                     }
                     else if (time.equals("Buổi tối")) {
 
-                        firebaseFirestore.collection("User").document("anhquan").collection("MenuFood")
+                        firebaseFirestore.collection("User").document(username).collection("MenuFood")
                                 .document("ngay_mai").update("toi", FieldValue.arrayUnion(foodKey));
 
                     }
@@ -237,21 +289,20 @@ public class ActitvityFoodDetail extends AppCompatActivity {
 
                     if (time.equals("Buổi sáng")) {
 
-                        firebaseFirestore.collection("User").document("anhquan").collection("MenuFood")
+                        firebaseFirestore.collection("User").document(username).collection("MenuFood")
                                 .document("ngay_kia").update("sang", FieldValue.arrayUnion(foodKey));
 
                     }
                     else if (time.equals("Buổi trưa")) {
 
-                        firebaseFirestore.collection("User").document("anhquan").collection("MenuFood")
+                        firebaseFirestore.collection("User").document(username).collection("MenuFood")
                                 .document("ngay_kia").update("trua", FieldValue.arrayUnion(foodKey));
 
                     }
                     else if (time.equals("Buổi tối")) {
 
-                        firebaseFirestore.collection("User").document("anhquan").collection("MenuFood")
+                        firebaseFirestore.collection("User").document(username).collection("MenuFood")
                                 .document("ngay_kia").update("toi", FieldValue.arrayUnion(foodKey));
-
                     }
                 }
 

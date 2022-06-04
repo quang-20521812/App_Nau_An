@@ -2,6 +2,7 @@ package com.example.cookingapp;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TabHost;
@@ -27,7 +29,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 
 
-public class FragmentMainPage extends Fragment {
+public class FragmentMainPage extends Fragment implements Adapter_SelectedFood.OnClickListener {
 
     int tabDayPos;
     TabHost tabHost;
@@ -70,6 +72,8 @@ public class FragmentMainPage extends Fragment {
         createTabs();
 
         setupTabBreakfast();
+        setupTabLunch();
+        setupTabDinner();
 
         tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
@@ -94,7 +98,7 @@ public class FragmentMainPage extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
         rcv_selectedFoodTabMorning.setLayoutManager(linearLayoutManager);
 
-        adapter_selectedFood.setFoodList(listFoodItemMorning);
+        adapter_selectedFood.setFoodList(listFoodItemMorning, this, "sang");
         rcv_selectedFoodTabMorning.setAdapter(adapter_selectedFood);
     }
 
@@ -102,7 +106,7 @@ public class FragmentMainPage extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
         rcv_selectedFoodTabNoon.setLayoutManager(linearLayoutManager);
 
-        adapter_selectedFood.setFoodList(listFoodItemNoon);
+        adapter_selectedFood.setFoodList(listFoodItemNoon, this, "trua");
         rcv_selectedFoodTabNoon.setAdapter(adapter_selectedFood);
     }
 
@@ -110,7 +114,7 @@ public class FragmentMainPage extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
         rcv_selectedFoodTabEvening.setLayoutManager(linearLayoutManager);
 
-        adapter_selectedFood.setFoodList(listFoodItemEvening);
+        adapter_selectedFood.setFoodList(listFoodItemEvening, this, "toi");
         rcv_selectedFoodTabEvening.setAdapter(adapter_selectedFood);
     }
 
@@ -165,13 +169,13 @@ public class FragmentMainPage extends Fragment {
                         listFoodIDNoon = (ArrayList<String>) document.get("trua");
                         listFoodIDEvening = (ArrayList<String>) document.get("toi");
                         if (time == "sang") {
-                            getFoodItem(listFoodIDMorning, time);
+                            getListFoodItem(listFoodIDMorning, time);
                         }
                         else if (time == "trua"){
-                            getFoodItem(listFoodIDNoon, time);
+                            getListFoodItem(listFoodIDNoon, time);
                         }
                         else {
-                            getFoodItem(listFoodIDEvening, time);
+                            getListFoodItem(listFoodIDEvening, time);
                         }
                     } else {
                         Log.d(TAG, "No such document");
@@ -183,7 +187,7 @@ public class FragmentMainPage extends Fragment {
         });
     }
 
-    private void getFoodItem(ArrayList<String> listFoodID, String time) {
+    private void getListFoodItem(ArrayList<String> listFoodID, String time) {
 
         if (time == "sang") {
             listFoodItemMorning = new ArrayList<>();
@@ -248,4 +252,18 @@ public class FragmentMainPage extends Fragment {
     }
 
 
+    @Override
+    public void onClickListener(ArrayList<Food> foodArrayList, int pos, Adapter_SelectedFood adapter_selectedFood) {
+        Intent intent = new Intent(getContext(), ActitvityFoodDetail.class);
+        Food food = adapter_selectedFood.getItem(pos);
+        intent.putExtra("foodKey", food.getFoodKey());
+        intent.putExtra("foodName", food.getFoodName());
+        intent.putExtra("foodCate", food.getFoodCate());
+        intent.putExtra("cookingSteps", food.getCookingSteps());
+        intent.putExtra("foodURL", food.getFoodURL());
+        intent.putExtra("isDelete", true);
+        intent.putExtra("day", tabDayPos);
+        intent.putExtra("time", adapter_selectedFood.getTime());
+        startActivity(intent);
+    }
 }

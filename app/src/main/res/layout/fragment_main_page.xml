@@ -40,10 +40,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:fontFamily="@font/poppinsr"
                         android:paddingTop="6dp"
                         android:text="Các món đã chọn"
-                        android:textColor="@color/black"
+                        android:textColor="@color/dark_purple"
                         android:textSize="18dp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
@@ -71,11 +70,11 @@
                         android:layout_gravity="center"
                         android:paddingTop="6dp"
                         android:text="Các món đã chọn"
-                        android:textColor="@color/black"
+                        android:textColor="@color/dark_purple"
                         android:textSize="18dp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"  />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rcv_selectedFoodTabNoon"
@@ -98,11 +97,11 @@
                         android:layout_gravity="center"
                         android:paddingTop="6dp"
                         android:text="Các món đã chọn"
-                        android:textColor="@color/black"
+                        android:textColor="@color/dark_purple"
                         android:textSize="18dp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"  />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rcv_selectedFoodTabEvening"

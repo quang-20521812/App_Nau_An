@@ -48,17 +48,6 @@ public class AdapterRandomFood extends RecyclerView.Adapter<AdapterRandomFood.Ra
         holder.setImage(randomFoodList.get(position));
     }
 
-//    private void startActivity() {
-//        Intent intent = new Intent(FragmentRandom.class, ActitvityFoodDetail.class);
-//        Food food = (Food) randomFoodList.get(viewPager2.getCurrentItem());
-//        intent.putExtra("foodKey", food.getFoodKey());
-//        intent.putExtra("foodName", food.getFoodName());
-//        intent.putExtra("foodCate", food.getFoodCate());
-//        intent.putExtra("cookingSteps", food.getCookingSteps());
-//        intent.putExtra("foodURL", food.getFoodURL());
-//        startActivity(intent);
-//    }
-
 
     @Override
     public int getItemCount() {
