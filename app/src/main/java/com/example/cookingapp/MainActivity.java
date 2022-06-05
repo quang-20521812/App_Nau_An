@@ -11,16 +11,24 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity {
 
     NavigationView navigationView;
     BottomNavigationView bottomNavigationView;
+    FirebaseFirestore firestore;
     String username;
+    String email;
+    String fullName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +99,27 @@ public class MainActivity extends AppCompatActivity {
         navigationView = findViewById(R.id.NavView);
         NavController navController = Navigation.findNavController(this, R.id.NavHost);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        firestore = FirebaseFirestore.getInstance();
+
+        firestore
+                .collection("User")
+                .document(username)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                fullName = document.getString("Name");
+                                View headerView = navigationView.getHeaderView(0);
+                                ((TextView) headerView.findViewById(R.id.tvNavName)).setText(fullName);
+                                ((TextView) headerView.findViewById(R.id.tvNavUsername)).setText(username);
+                            }
+                        }
+                    }
+                });
 
 
         navigationView.getMenu().getItem(0).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {

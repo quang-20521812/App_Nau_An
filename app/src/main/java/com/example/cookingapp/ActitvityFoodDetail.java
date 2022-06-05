@@ -152,28 +152,69 @@ public class ActitvityFoodDetail extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (isDelete){
-
                     Intent intent = getIntent();
                     String foodKey = intent.getStringExtra("foodKey");
 
-                    firestore = FirebaseFirestore.getInstance();
-
-                    firestore
-                            .collection("User")
-                            .document(username)
-                            .collection("MenuFood")
-                            .document(day)
-                            .update(time, FieldValue.arrayRemove(foodKey));
-
-                    Intent reloadMainActivity = new Intent(ActitvityFoodDetail.this, MainActivity.class);
-                    reloadMainActivity.putExtra("username", username);
-                    startActivity(reloadMainActivity);
+                    openConfirmDialog(Gravity.CENTER, foodKey);
                 }
                 else{
                     openOptionDialog(Gravity.CENTER);
                 }
             }
         });
+    }
+
+    private void openConfirmDialog(int gravity, String foodKey) {
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.confirm_dialog_layout);
+
+        Window window = dialog.getWindow();
+        if (window == null) {
+            return;
+        }
+
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        WindowManager.LayoutParams windowAttributes = window.getAttributes();
+        windowAttributes.gravity = gravity;
+        window.setAttributes(windowAttributes);
+
+        dialog.setCancelable(true);
+
+        //Setup view
+        Button btnConfirm = dialog.findViewById(R.id.btnConfirmDelete);
+        Button btnCancel = dialog.findViewById(R.id.btnCancelDelete);
+
+        btnConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                firestore = FirebaseFirestore.getInstance();
+
+                firestore
+                        .collection("User")
+                        .document(username)
+                        .collection("MenuFood")
+                        .document(day)
+                        .update(time, FieldValue.arrayRemove(foodKey));
+
+
+                dialog.dismiss();
+                Intent reloadMainActivity = new Intent(ActitvityFoodDetail.this, MainActivity.class);
+                reloadMainActivity.putExtra("username", username);
+                startActivity(reloadMainActivity);
+            }
+        });
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
     }
 
     public void openOptionDialog(int gravity) {

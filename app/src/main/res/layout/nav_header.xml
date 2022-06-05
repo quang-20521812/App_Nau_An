@@ -20,19 +20,21 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="22dp"
+            android:layout_height="24dp"
             android:text="abc"
             android:textSize="18dp"
             android:textStyle="bold"
             android:textColor="@color/black"
-            android:fontFamily="@font/poppinsr"/>
+            android:fontFamily="@font/poppinsr"
+            android:id="@+id/tvNavName"/>
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="22dp"
+            android:layout_height="20dp"
             android:textSize="15dp"
             android:text="abc@gmail.com"
-            android:fontFamily="@font/poppinsr"/>
+            android:fontFamily="@font/poppinsr"
+            android:id="@+id/tvNavUsername"/>
 
     </LinearLayout>
 
