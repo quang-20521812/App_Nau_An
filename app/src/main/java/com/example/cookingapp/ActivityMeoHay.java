@@ -10,7 +10,6 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 public class ActivityMeoHay extends AppCompatActivity {
-    //private int resourceID;
     private String title, description, url;
 
     @Override
@@ -22,6 +21,7 @@ public class ActivityMeoHay extends AppCompatActivity {
         TextView textViewTitleMain = (TextView) findViewById(R.id.textViewTitleActivityMeoHay);
         TextView textViewDesMain = (TextView) findViewById(R.id.textViewDesActivityMeoHay);
 
+        // Get data from AdapterMeoHay
         Intent intent = getIntent();
         title = intent.getStringExtra("tipTitle");
         description = intent.getStringExtra("tipDescription");

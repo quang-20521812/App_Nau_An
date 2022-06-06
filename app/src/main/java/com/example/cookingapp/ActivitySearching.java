@@ -49,7 +49,7 @@ public class ActivitySearching extends AppCompatActivity {
         adapterSearching_item = new AdapterSearching_Item(listFoods, getApplicationContext());
         gridViewSearchingItem.setAdapter(adapterSearching_item);
 
-        // Lấy toàn bộ danh sách món ăn
+        // Show all foods in database
         searchListFoods(searchViewMain.getQuery().toString());
 
         searchViewMain.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -71,6 +71,7 @@ public class ActivitySearching extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Food food = (Food) gridViewSearchingItem.getItemAtPosition(i);
+                // Send data to ActivityFoodDetail
                 Intent intent = new Intent(ActivitySearching.this, ActitvityFoodDetail.class);
                 intent.putExtra("foodKey", food.getFoodKey());
                 intent.putExtra("foodName", food.getFoodName());
@@ -90,11 +91,13 @@ public class ActivitySearching extends AppCompatActivity {
 
     public void searchListFoods(String query) {
         FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+        // Get list foods from database
         firebaseFirestore.collection("Food").get()
                 .addOnCompleteListener(task -> {
                     listFoods.clear();
                     adapterSearching_item.setData(listFoods);
                     for (DocumentSnapshot documentSnapshot: task.getResult().getDocuments()) {
+                        // Compare and get data
                         if (documentSnapshot.getString("foodName").toLowerCase().contains(query.toLowerCase())) {
                             ArrayList<Ingredient> ingredientArrayList = new ArrayList<>();
 
