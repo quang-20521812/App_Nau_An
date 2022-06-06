@@ -112,6 +112,14 @@
 
                 </LinearLayout>
             </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/firstFrame"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:layout_marginTop="50dp"
+                android:layout_weight="1" />
+
         </LinearLayout>
     </TabHost>
 </androidx.constraintlayout.widget.ConstraintLayout>

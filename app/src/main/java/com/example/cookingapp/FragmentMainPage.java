@@ -101,7 +101,6 @@ public class FragmentMainPage extends Fragment implements Adapter_SelectedFood.O
         });
         return v;
     }
-
     private void retrieveUsername() {
         //Get username from MainActivity
         username = ((MainActivity) getActivity()).getUsername();

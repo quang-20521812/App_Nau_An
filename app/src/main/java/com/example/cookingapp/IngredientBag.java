@@ -75,7 +75,7 @@ public class IngredientBag extends Fragment {
     private void retrieveUsername() {
         username = ((MainActivity) getActivity()).getUsername();
     }
-
+    //Get chosen food list of current user
     private void getListFood() {
         firestore = FirebaseFirestore.getInstance();
         CollectionReference getListFoodID = firestore
@@ -113,6 +113,7 @@ public class IngredientBag extends Fragment {
             }
         });
     }
+    //Get list ingredient from firestore
     private void getIngerdients(ArrayList<String> listFoodID){
         firestore = FirebaseFirestore.getInstance();
         for(int i = 0; i < listFoodID.size(); i++){
@@ -143,6 +144,7 @@ public class IngredientBag extends Fragment {
             });
         }
     }
+
     private void updateListView() {
         adapterShoppingBag = new AdapterShoppingBag(shoppingBag);
         listView.setAdapter(adapterShoppingBag);
