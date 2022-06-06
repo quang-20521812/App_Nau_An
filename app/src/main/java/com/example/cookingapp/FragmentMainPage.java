@@ -54,7 +54,7 @@ public class FragmentMainPage extends Fragment implements Adapter_SelectedFood.O
         super.onCreate(savedInstanceState);
 
         retrieveUsername();
-
+        //Get FoodID for each Day and time
         getListFoodID(tabDayPos, "sang");
         getListFoodID(tabDayPos, "trua");
         getListFoodID(tabDayPos, "toi");
@@ -103,6 +103,7 @@ public class FragmentMainPage extends Fragment implements Adapter_SelectedFood.O
     }
 
     private void retrieveUsername() {
+        //Get username from MainActivity
         username = ((MainActivity) getActivity()).getUsername();
     }
 
@@ -165,7 +166,7 @@ public class FragmentMainPage extends Fragment implements Adapter_SelectedFood.O
             day = "ngay_mai";
         else
             day = "ngay_kia";
-
+        //Get selected FoodID from Firestore
         DocumentReference getListFoodID = firestore
                 .collection("User")
                 .document(username)
@@ -216,7 +217,7 @@ public class FragmentMainPage extends Fragment implements Adapter_SelectedFood.O
                 DocumentReference documentReference = firestore
                         .collection("Food")
                         .document(ID);
-
+                //Get Food Item from FireStore
                 documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -263,7 +264,7 @@ public class FragmentMainPage extends Fragment implements Adapter_SelectedFood.O
         }
     }
 
-
+    //Selected Food item click event
     @Override
     public void onClickListener(ArrayList<Food> foodArrayList, int pos, Adapter_SelectedFood adapter_selectedFood) {
         Intent intent = new Intent(getContext(), ActitvityFoodDetail.class);

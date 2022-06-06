@@ -69,6 +69,7 @@ public class ActitvityFoodDetail extends AppCompatActivity {
     }
 
     private void retrieveUsername() {
+        // Get username
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
     }
@@ -76,6 +77,7 @@ public class ActitvityFoodDetail extends AppCompatActivity {
     private void retrieveIngredientsList(String foodKey) {
         firestore = FirebaseFirestore.getInstance();
 
+        //Get Ingredients List from FireStore
         ArrayList<Ingredient> ingredientArrayList = new ArrayList<>();
             firestore.collection("Food").document(foodKey)
                     .collection("ingredients")
@@ -91,7 +93,9 @@ public class ActitvityFoodDetail extends AppCompatActivity {
                                             ingredients.get("ingUnit").toString(),
                                             Integer.parseInt(ingredients.get("ingQuantity").toString())));
                                 }
+                                //Set IngredientsList for Food
                                 food.setIngredients(ingredientArrayList);
+                                //Setup view
                                 setupTabIngredient();
                                 setuptabCookingStep();
                             } else {
@@ -105,7 +109,7 @@ public class ActitvityFoodDetail extends AppCompatActivity {
     private void retrieveFood() {
 
         Button btnDel = findViewById(R.id.btnAddToMenu);
-
+        //Get Food from intent
         Intent intent = getIntent();
         food = new Food();
         food.setFoodKey(intent.getStringExtra("foodKey"));
@@ -152,6 +156,7 @@ public class ActitvityFoodDetail extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (isDelete){
+                    //Get FoodKey
                     Intent intent = getIntent();
                     String foodKey = intent.getStringExtra("foodKey");
 
@@ -174,6 +179,7 @@ public class ActitvityFoodDetail extends AppCompatActivity {
             return;
         }
 
+        //Set attribute for Dialog
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
         window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
@@ -213,7 +219,7 @@ public class ActitvityFoodDetail extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
-
+        //Show dialog
         dialog.show();
     }
 
@@ -227,6 +233,7 @@ public class ActitvityFoodDetail extends AppCompatActivity {
             return;
         }
 
+        //Setup Attribute for dialog
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
         window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
@@ -344,11 +351,12 @@ public class ActitvityFoodDetail extends AppCompatActivity {
                                 .document("ngay_kia").update("toi", FieldValue.arrayUnion(foodKey));
                     }
                 }
-
-               dialog.dismiss();
+                //Close dialog
+                dialog.dismiss();
             }
         });
 
+        //Show dialog
         dialog.show();
     }
 

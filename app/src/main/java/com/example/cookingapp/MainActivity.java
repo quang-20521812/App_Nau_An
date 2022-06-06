@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     FirebaseFirestore firestore;
     String username;
-    String email;
     String fullName;
 
     @Override
@@ -47,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void retrieveUsername() {
+        //get username from intent
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
     }
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupBottomNavigationView() {
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNav);
-
+        //Setup fragments on MainActivity
         FragmentMeoHay fragmentMeoHay = new FragmentMeoHay();
         FragmentTab fragmentTab = new FragmentTab();
         FragmentRandom fragmentRandom = new FragmentRandom();
@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
 
         firestore = FirebaseFirestore.getInstance();
-
+        //Get full name from FireStore with username
         firestore
                 .collection("User")
                 .document(username)
@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-
+    //Menu item click event
         navigationView.getMenu().getItem(0).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {

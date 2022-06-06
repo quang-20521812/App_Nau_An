@@ -52,6 +52,7 @@ public class ActivityNavigationFood extends AppCompatActivity {
     }
 
     private void retrieveUsername() {
+        //Get username from intent
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
     }
@@ -60,7 +61,6 @@ public class ActivityNavigationFood extends AppCompatActivity {
         lvFood = (ListView) findViewById(R.id.lvFesFood);
         btnBack = (Button) findViewById(R.id.btnBack);
         tvTitle = (TextView) findViewById(R.id.tvTitle);
-
 
 
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -94,9 +94,10 @@ public class ActivityNavigationFood extends AppCompatActivity {
     }
 
     private void retrieveFoodCate_FoodKey() {
+        //Get foodCate from intent
         Intent intent = getIntent();
         foodCate = intent.getStringExtra("foodCate");
-
+        //Get all Food with the same foodCate
         switch (foodCate) {
             case "simple": {
                 tvTitle.setText("Các món ăn đơn giản");
@@ -123,6 +124,7 @@ public class ActivityNavigationFood extends AppCompatActivity {
                 getFoodKey(foodCate);
                 break;
             }
+            //Get all food
             default: {
                 firestore = FirebaseFirestore.getInstance();
                 tvTitle.setText("Hôm nay thiên hạ ăn gì!");

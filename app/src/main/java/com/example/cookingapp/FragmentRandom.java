@@ -2,14 +2,11 @@ package com.example.cookingapp;
 
 import static android.content.ContentValues.TAG;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
@@ -19,26 +16,22 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.cookingapp.Adapter.AdapterRandomFood;
 import com.example.cookingapp.Model.Food;
 import com.example.cookingapp.Model.Ingredient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.card.MaterialCardView;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class FragmentRandom extends Fragment implements AdapterRandomFood.OnItemClickListener{
 
-    private ViewPager2 viewPager2;
+    private ViewPager2 viewPagerRandomFood;
     private ArrayList<Food> randomFoodList;
     private FirebaseFirestore firestore;
     private ArrayList<String> foodKeyList;
@@ -63,7 +56,7 @@ public class FragmentRandom extends Fragment implements AdapterRandomFood.OnItem
 
         retrieveUsername();
 
-        viewPager2 = view.findViewById(R.id.viewPagerImageSlider);
+        viewPagerRandomFood = view.findViewById(R.id.viewPagerImageSlider);
 
         retrieveFood();
 
@@ -71,16 +64,18 @@ public class FragmentRandom extends Fragment implements AdapterRandomFood.OnItem
     }
 
     private void retrieveUsername() {
+        //Get username from MainActivity
         username = ((MainActivity) getActivity()).getUsername();
     }
 
     private void updateView(){
-        viewPager2.setAdapter(new AdapterRandomFood(randomFoodList, viewPager2, this));
-
-        viewPager2.setClipToPadding(false);
-        viewPager2.setClipChildren(false);
-        viewPager2.setOffscreenPageLimit(3);
-        viewPager2.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
+        //Setup adapter for viewpager
+        viewPagerRandomFood.setAdapter(new AdapterRandomFood(randomFoodList, viewPagerRandomFood, this));
+        //Setup attributes for viewpager
+        viewPagerRandomFood.setClipToPadding(false);
+        viewPagerRandomFood.setClipChildren(false);
+        viewPagerRandomFood.setOffscreenPageLimit(3);
+        viewPagerRandomFood.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
 
         CompositePageTransformer compositePageTransformer = new CompositePageTransformer();
         compositePageTransformer.addTransformer(new MarginPageTransformer(40));
@@ -91,13 +86,13 @@ public class FragmentRandom extends Fragment implements AdapterRandomFood.OnItem
                 page.setScaleY(0.85f + r * 0.15f);
             }
         });
-        viewPager2.setPageTransformer(compositePageTransformer);
+        viewPagerRandomFood.setPageTransformer(compositePageTransformer);
     }
 
     private void retrieveFood(){
         firestore = FirebaseFirestore.getInstance();
         foodKeyList = new ArrayList<String>();
-
+        //Get random food from FireStore
         firestore.collection("Food")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -133,10 +128,11 @@ public class FragmentRandom extends Fragment implements AdapterRandomFood.OnItem
                 });
     }
 
+    //Viewpager item click event
     @Override
     public void OnItemClick(int position) {
         Intent intent = new Intent(getContext(), ActitvityFoodDetail.class);
-        Food food = (Food) randomFoodList.get(viewPager2.getCurrentItem());
+        Food food = (Food) randomFoodList.get(viewPagerRandomFood.getCurrentItem());
         intent.putExtra("foodKey", food.getFoodKey());
         intent.putExtra("foodName", food.getFoodName());
         intent.putExtra("foodCate", food.getFoodCate());
