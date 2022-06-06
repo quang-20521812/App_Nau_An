@@ -92,13 +92,13 @@ public class FragmentMeoHay extends Fragment {
         recyclerViewMain.setLayoutManager(linearLayoutManager);
 
         getListItem();
-        //adapterMain.setData(getListItem());
 
         return viewMain;
     }
 
     private void getListItem() {
         FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+        // Get list tips from database
         firebaseFirestore.collection("Tips").get().addOnCompleteListener(task -> {
             for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
                 Tips tips = new Tips(documentSnapshot.getString("tipTitle"), documentSnapshot.getString("tipDescription"), documentSnapshot.getString("tipURL"));

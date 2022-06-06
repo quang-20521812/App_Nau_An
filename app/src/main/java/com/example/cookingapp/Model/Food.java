@@ -9,17 +9,10 @@ public class Food {
     private String foodCate;
     private ArrayList<Ingredient> ingredients;
     private ArrayList<String> cookingSteps;
-    private int resourceID;
-
-    // Nguyễn Phúc sửa
     private String foodURL;
 
-    public String getFoodURL() {
-        return foodURL;
-    }
-
-    public void setfoodURL(String foodURL) {
-        this.foodURL = foodURL;
+    public Food(){
+        return;
     }
 
     public Food(String foodKey, String foodName, String foodCate, ArrayList<Ingredient> ingredients, ArrayList<String> cookingSteps, String foodURL) {
@@ -30,42 +23,6 @@ public class Food {
         this.cookingSteps = cookingSteps;
         this.foodURL = foodURL;
     }
-    // Nguyễn Phúc sửa
-
-    public Food(){
-        return;
-    }
-
-    public Food(String foodName, int resourceID) {
-        this.foodName = foodName;
-        this.resourceID = resourceID;
-    }
-
-    public int getResourceID() {
-        return resourceID;
-    }
-
-    public void setResourceID(int resourceID) {
-        this.resourceID = resourceID;
-    }
-
-    public void setFoodCate(String foodCate) {
-        this.foodCate = foodCate;
-    }
-
-    public void setCookingSteps(ArrayList<String> cookingSteps) {
-        this.cookingSteps = cookingSteps;
-    }
-
-    public Food(String foodKey, String foodName, String foodCate, ArrayList<Ingredient> ingredients, ArrayList<String> cookingSteps, int resourceID) {
-        this.foodKey = foodKey;
-        this.foodName = foodName;
-        this.foodCate = foodCate;
-        this.ingredients = ingredients;
-        this.cookingSteps = cookingSteps;
-        this.resourceID = resourceID;
-    }
-
 
     public String getFoodKey() {
         return foodKey;
@@ -79,16 +36,16 @@ public class Food {
         return foodName;
     }
 
+    public void setFoodName(String foodName) {
+        this.foodName = foodName;
+    }
+
     public String getFoodCate() {
         return foodCate;
     }
 
-    public ArrayList<String> getCookingSteps() {
-        return cookingSteps;
-    }
-
-    public void setFoodName(String foodName) {
-        this.foodName = foodName;
+    public void setFoodCate(String foodCate) {
+        this.foodCate = foodCate;
     }
 
     public ArrayList<Ingredient> getIngredients() {
@@ -99,5 +56,19 @@ public class Food {
         this.ingredients = ingredients;
     }
 
+    public ArrayList<String> getCookingSteps() {
+        return cookingSteps;
+    }
 
+    public void setCookingSteps(ArrayList<String> cookingSteps) {
+        this.cookingSteps = cookingSteps;
+    }
+
+    public String getFoodURL() {
+        return foodURL;
+    }
+
+    public void setfoodURL(String foodURL) {
+        this.foodURL = foodURL;
+    }
 }

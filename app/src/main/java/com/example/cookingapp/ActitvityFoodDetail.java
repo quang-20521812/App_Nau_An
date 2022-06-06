@@ -241,6 +241,7 @@ public class ActitvityFoodDetail extends AppCompatActivity {
         windowAttributes.gravity = gravity;
         window.setAttributes(windowAttributes);
 
+        // Cancel dialog when click outside the dialog
         dialog.setCancelable(true);
 
         // Setup View Dialog
@@ -249,14 +250,17 @@ public class ActitvityFoodDetail extends AppCompatActivity {
         Button btnConfirm = (Button) dialog.findViewById(R.id.btnConfirmAddToMenu);
         Button btnCancle = (Button) dialog.findViewById(R.id.btnCancelAddToMenu);
 
+        // Set data for Day Spinner
         ArrayList<String> listDay = new ArrayList<String>();
         listDay.add("Hôm nay");
         listDay.add("Ngày mai");
         listDay.add("Ngày kia");
+
         ArrayAdapter<String> adapterDay = new ArrayAdapter(this, android.R.layout.simple_spinner_item, listDay);
         adapterDay.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
         spnCategoryDay.setAdapter(adapterDay);
 
+        // Set data for Time Spinner
         ArrayList<String> listTime = new ArrayList<String>();
         listTime.add("Buổi sáng");
         listTime.add("Buổi trưa");
@@ -281,6 +285,7 @@ public class ActitvityFoodDetail extends AppCompatActivity {
                 String day = spnCategoryDay.getSelectedItem().toString();
                 String time = spnCategoryTime.getSelectedItem().toString();
 
+                // Back to MainActivity
                 Intent reloadMainActivity = new Intent(ActitvityFoodDetail.this, MainActivity.class);
                 reloadMainActivity.putExtra("username", username);
                 startActivity(reloadMainActivity);
@@ -290,7 +295,7 @@ public class ActitvityFoodDetail extends AppCompatActivity {
                 if (day.equals("Hôm nay")) {
 
                     if (time.equals("Buổi sáng")) {
-
+                        // Add food to user's menu
                         firebaseFirestore.collection("User").document(username).collection("MenuFood")
                                 .document("hom_nay").update("sang", FieldValue.arrayUnion(foodKey));
 

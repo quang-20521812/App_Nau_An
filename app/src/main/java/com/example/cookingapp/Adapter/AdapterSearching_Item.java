@@ -44,7 +44,7 @@ public class AdapterSearching_Item extends BaseAdapter {
 
     @Override
     public long getItemId(int i) {
-        return listFoods.get(i).getResourceID();
+        return 0;
     }
 
     @Override

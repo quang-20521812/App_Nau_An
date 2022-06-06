@@ -49,9 +49,11 @@ public class AdapterMeoHay extends RecyclerView.Adapter<AdapterMeoHay.ItemViewHo
         Picasso.get().load(tips.getTipURL()).into(holder.imageViewDisplay);
         holder.textViewDisplay.setText(tips.getTitle());
 
+        // List item OnClickListener
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Send data to ActivityMeoHay
                 Intent intent = new Intent(mContext, ActivityMeoHay.class);
                 intent.putExtra("tipTitle", tips.getTitle());
                 intent.putExtra("tipDescription", tips.getDescription());
