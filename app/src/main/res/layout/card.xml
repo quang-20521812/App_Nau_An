@@ -25,22 +25,24 @@
             android:layout_width="240dp"
             android:layout_height="135dp"
             android:src="@drawable/bunbo"
+            android:scaleType="centerCrop"
             />
 
     </com.google.android.material.card.MaterialCardView>
 
     <TextView
         android:id="@+id/txtRandomName"
-        android:layout_width="240dp"
-        android:layout_height="wrap_content"
+        android:layout_width="237dp"
+        android:layout_height="63dp"
+        android:paddingHorizontal="8dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="3dp"
-        android:text="Bún Bò"
+        android:fontFamily="@font/poppinsr"
+        android:text="Canh soup củ dền nấu thịt"
         android:textAlignment="center"
+        android:textColor="@color/dark_purple"
         android:textSize="20dp"
         android:textStyle="bold"
-        android:fontFamily="@font/poppinsr"
-        android:textColor="@color/dark_purple"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/materialCardView" />
 

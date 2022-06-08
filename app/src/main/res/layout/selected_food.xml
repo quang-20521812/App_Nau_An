@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
-    android:layout_height="170dp"
+    android:layout_height="190dp"
     android:outlineSpotShadowColor="@color/dark_purple">
 
     <LinearLayout
@@ -24,17 +24,17 @@
                 android:src="@drawable/bunbo" />
         </androidx.cardview.widget.CardView>
 
-
         <TextView
             android:id="@+id/nameFood"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Bún Bò"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:text="Canh soup củ dền nấu thịt"
             android:textAlignment="center"
             android:textColor="@color/dark_purple"
             android:textIsSelectable="false"
             android:textSize="18dp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
     </LinearLayout>
 
 

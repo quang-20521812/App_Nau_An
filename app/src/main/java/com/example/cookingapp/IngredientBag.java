@@ -77,6 +77,7 @@ public class IngredientBag extends Fragment {
     }
     //Get chosen food list of current user
     private void getListFood() {
+        listFoodID.clear();
         firestore = FirebaseFirestore.getInstance();
         CollectionReference getListFoodID = firestore
                 .collection("User")

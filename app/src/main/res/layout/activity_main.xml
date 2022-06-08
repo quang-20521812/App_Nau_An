@@ -12,29 +12,15 @@
         android:layout_height="match_parent"
         tools:context=".MainPage">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:background="?attr/colorPrimary"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="@style/ToolbarTheme"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:title="Toolbar"
-            app:titleTextAppearance="@style/Toolbar.TitleText" />
-
         <fragment
             android:id="@+id/NavHost"
             android:name="androidx.navigation.fragment.NavHostFragment"
-            android:layout_marginTop="60dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:defaultNavHost="true"
+            app:flow_verticalBias="2"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:flow_verticalBias="2"></fragment>
+            app:layout_constraintTop_toTopOf="parent"></fragment>
 
         <TextView
             android:id="@+id/tvRandomFood"
@@ -55,12 +41,11 @@
         <FrameLayout
             android:id="@+id/FrameRandomFood"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginTop="50dp"
+            android:layout_height="250dp"
+            android:layout_marginBottom="32dp"
             android:layout_weight="1"
             app:layout_constraintBottom_toTopOf="@+id/bottomNav"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNav"
