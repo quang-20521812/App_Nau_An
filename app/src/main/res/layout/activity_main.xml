@@ -42,7 +42,7 @@
             android:id="@+id/FrameRandomFood"
             android:layout_width="match_parent"
             android:layout_height="250dp"
-            android:layout_marginBottom="32dp"
+            android:layout_marginBottom="8dp"
             android:layout_weight="1"
             app:layout_constraintBottom_toTopOf="@+id/bottomNav"
             app:layout_constraintStart_toStartOf="parent" />
