@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Hôm nay ăn gì");
+        actionBar.setTitle("HÔM NAY ĂN GÌ?");
 
         retrieveUsername();
 
