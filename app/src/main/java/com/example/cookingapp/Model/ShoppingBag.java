@@ -11,20 +11,12 @@ public class ShoppingBag {
     }
 
     public void addFood(ArrayList<Ingredient> ingredients) {
-
-        int size;
-        if (this.ingredientList.size() < ingredients.size()) {
-            size = this.ingredientList.size();
-        } else {
-            size = ingredients.size();
-        }
         int j = 0;
         int temp1 = 0;
         int temp2 = 0;
-        for (int i = 0; i < size; i++) {
-            for (j = 0; j < size; j++) {
-                if (this.ingredientList.get(i).getIngKey().compareTo(ingredients.get(j).getIngKey()) == 0
-                        && ingredients.get(i).getIngQuantity() != 0) {
+        for (int i = 0; i < this.ingredientList.size(); i++) {
+            for (j = 0; j < ingredients.size(); j++) {
+                if (this.ingredientList.get(i).getIngKey().compareTo(ingredients.get(j).getIngKey()) == 0) {
                     temp1 = this.ingredientList.get(i).getIngQuantity();
                     temp2 = ingredients.get(j).getIngQuantity();
                     this.ingredientList.get(i).setIngQuantity(temp1 + temp2);
