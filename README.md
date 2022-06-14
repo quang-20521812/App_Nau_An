@@ -3,6 +3,7 @@ Thông tin nhóm: <br />
 20521761 - Lê Hoàng Phúc <br />
 20521767 - Nguyễn Hoàng Phúc <br />
 20521785 - Đặng Hồ Anh Quân <br />
+20521483 - Trần Duy Khôi <br />
 
 link Github: https://github.com/quang-20521812/App_Nau_An.git
 <br />
